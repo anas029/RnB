@@ -5,22 +5,29 @@ function auth_signup_get(req, res) {
     res.render('auth/signup')
 }
 
-function auth_signup_post(req, res) {
+async function auth_signup_post(req, res) {
     User.isValid(req.body)
         .then((result) => {
             const user = new User(result)
             user.save()
                 .then(() => res.redirect('/auth/signin'))
-                .catch((err) => console.log(err.message))
+                .catch((e) => {
+                    console.error(e)
+                    res.send(e.message)
+                })
         })
-        .catch(e => console.log(e.message))
+        .catch(e => {
+            console.error(e)
+            res.send(e.message)
+        })
 }
 
 function auth_signin_get(req, res) {
     res.render('auth/signin')
 }
 const auth_signin_post = passport.authenticate('local', {
-    successRedirect: '/',
+    successReturnToOrRedirect: '/',
+    // successRedirect: '/',
     failureRedirect: '/auth/signin'
 })
 
