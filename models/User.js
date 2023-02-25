@@ -9,8 +9,8 @@ const userSchema = mongoose.Schema({
     telNumber: { type: String, required: true },
     password: { type: String, required: true },
     credit: { type: Number, default: 0 },
-    item: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Item' }],
-    review: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }],
+    item: [{ type: mongoose.Schema.Types.ObjectId, refPath: 'Item' }],
+    review: [{ type: mongoose.Schema.Types.ObjectId, refPath: 'Review' }],
 }, { timestamps: true })
 
 userSchema.statics.verify = async function (emailAddress, password) {
@@ -37,8 +37,6 @@ userSchema.statics.isValid = async function ({ firstName, lastName, username, em
     let emailAddressL = emailAddress.toLowerCase()
     if (!validator.isEmail(emailAddressL))
         throw Error('Email is not valid')
-    // const userExist = this.findOne({ username: usernameL }).exec()
-    // console.log(await this.findOne({ username: usernameL }).exec())
     if (await this.findOne({ username: usernameL }).exec())
         throw Error('Username already registered')
     const emailExist = this.findOne({ emailAddress: emailAddressL })
@@ -52,5 +50,16 @@ userSchema.statics.isValid = async function ({ firstName, lastName, username, em
     // return user
     // return { firstName, lastName, username, emailAddress, telNumber, password: hash }
 }
+userSchema.virtual('score', async () => {
+    const total = await this.populate({ path: 'item', select: 'score' })
+
+})
+// userSchema.virtual('score').get(() => {
+//     return this.populate({
+//         {path: 'item',select: 'review'},
+//         populate: { path: 'review' }
+//     })
+// })
+
 // exporting User Model
 module.exports = mongoose.model('User', userSchema)

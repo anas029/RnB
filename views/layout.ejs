@@ -14,11 +14,34 @@
     <nav>
         <a href="/">home</a>
         <a href="/home/another">another</a>
-        <a href="/auth/signin">sign in</a>
-        <a href="/auth/signup">sign up</a>
-        <a href="/auth/signout">sign out</a>
+        <% if (name) { %>
+            <a href="/auth/signout">sign out</a>
+            <% } else { %>
+                <a href="/auth/signin">sign in</a>
+                <a href="/auth/signup">sign up</a>
+                <% } %>
+
+
     </nav>
-    <%- body %>
+
+    <% if (locals.messages) { %>
+        <ul class="messages">
+            <% Object.keys(messages).forEach((key)=> { %> <% messages[key].forEach((message)=> { %>
+                    <li class="<%= key %>">
+                        <%= message %>
+                    </li>
+                    <% }) %>
+                        <% }) %>
+        </ul>
+        <% } %>
+            <hr>
+            <% if (messages.error) { %>
+                <p>
+                    <%= messages.error %>
+                </p>
+                <% } %>
+                    <br>
+                    <%- body %>
 </body>
 
 </html>

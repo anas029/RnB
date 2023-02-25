@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 const User = require('../models/User')
 const passport = require('../lib/passportConfig')
 function auth_signup_get(req, res) {
-    res.render('auth/signup')
+    res.render('auth/signup', { name: req.user })
 }
 
 async function auth_signup_post(req, res) {
@@ -12,23 +12,26 @@ async function auth_signup_post(req, res) {
             user.save()
                 .then(() => res.redirect('/auth/signin'))
                 .catch((e) => {
+                    req.flash('error', e.message)
                     console.error(e)
                     res.send(e.message)
                 })
         })
         .catch(e => {
+            req.flash('error', e.message)
             console.error(e)
             res.send(e.message)
         })
 }
 
 function auth_signin_get(req, res) {
-    res.render('auth/signin')
+    res.render('auth/signin', { name: req.user })
 }
 const auth_signin_post = passport.authenticate('local', {
-    successReturnToOrRedirect: '/',
-    // successRedirect: '/',
-    failureRedirect: '/auth/signin'
+    // successReturnToOrRedirect: '/',
+    successRedirect: '/',
+    failureRedirect: '/auth/signin',
+    // failureFlash: true
 })
 
 function auth_signout_get(req, res) {

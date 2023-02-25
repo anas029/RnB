@@ -15,5 +15,4 @@ router.get('/', indexCtrl.index_get)
 router.get('/home/another', connect.ensureLoggedIn('/auth/signin'), indexCtrl.another_get)
 
 
-
 module.exports = router
