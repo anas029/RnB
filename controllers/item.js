@@ -42,4 +42,34 @@ exports.item_index_get = (req,res)=>{
 }
 
 
+//HTTP GET - load edit form :
+exports.item_edit_get = (req,res)=>{
+    
+    Item.findByIdAndUpdate(req.query.id)
+    .then(item => {
+        res.render("item/edit",{item , name: req.user});
+    })
+    .catch(err => {
+        console.log(err);
+    })
+}
+
+// HTTP POST - to post the edit data 
+exports.item_edit_post = (req,res)=>{
+    console.log(req.body)
+    Item.findByIdAndUpdate(req.body.id , req.body)
+   
+
+.then(()=>{
+    res.redirect("/item/index");
+})
+.catch((err) => {
+    console.log(err);
+    res.send("Please try again later!!!");
+})
+
+}
+
+
+
 

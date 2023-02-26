@@ -1,0 +1,31 @@
+<h1>Edit item</h1>
+
+<form method="POST" action="/item/add">
+<div>
+    <label>Item Name</label>
+    <input name="itemName" type="text" value="<%= item.itemName %>"/>
+</div>
+<div>
+    <label>Item description</label>
+    <textarea name="description"> <%= item.description%> </textarea>
+</div>
+<div>
+    <label>Item price</label>
+    <input name="priceRate" type="text" value="<%= item.priceRate %>"/>
+</div>
+<div>
+    <label>Item condition</label>
+    <input name="condition" type="text" value="<%= item.condition %>"/>
+</div>
+<div>
+    <label>Item Type</label>
+    <input name="type" type="text" value="item.type"/>
+</div>
+
+<input type="hidden" name="id" value="<%= item._id %>"/>
+
+<button type="submit">Edit item</button>
+
+</form>
+
+
