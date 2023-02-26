@@ -50,10 +50,55 @@ userSchema.statics.isValid = async function ({ firstName, lastName, username, em
     // return user
     // return { firstName, lastName, username, emailAddress, telNumber, password: hash }
 }
-userSchema.virtual('score', async () => {
-    const total = await this.populate({ path: 'item', select: 'score' })
+// userSchema.virtual('score').get(async () => {
+//     const total = await this.populate({ path: 'item', select: 'score' })
+/*
 
-})
+authors = await Author.
+find({}).
+// Works, foreign field `author` is selected
+populate({ path: 'posts', select: 'title author' }).
+exec();
+
+AuthorSchema.virtual('posts', {
+ref: 'BlogPost',
+localField: '_id',
+foreignField: 'author',
+match: { archived: false } // match option with basic query selector
+});
+
+*/
+
+/*
+User.find({})
+  .populate({
+    path: 'items',
+    populate: {
+      path: 'comments',
+      model: 'Comment'
+    }
+  })
+  .exec((err, users) => {
+    if (err) {
+      console.error(err);
+    } else {
+      console.log(users);
+    }
+  });
+*/
+
+// })
+// userSchema.virtual('item', {
+//     ref: 'Item',
+//     localField: '_id',
+//     foreignField: 'user'
+// })
+// userSchema.virtual('review', {
+//     ref: 'Review',
+//     localField: '_id',
+//     foreignField: 'user'
+// })
+
 // userSchema.virtual('score').get(() => {
 //     return this.populate({
 //         {path: 'item',select: 'review'},
