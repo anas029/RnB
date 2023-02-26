@@ -18,6 +18,7 @@
         <a href="/user/list">Users list</a>
         <a href="/user/myProfile">My profile</a>
         <a href="/item/add">Add item</a>
+
         <% if (name) { %>
             <a href="/auth/signout">sign out</a>
             <% } else { %>
@@ -25,7 +26,10 @@
                 <a href="/auth/signup">sign up</a>
                 <% } %>
 
-
+                    <% if (locals.user) { %>
+                        <p>Hi <%= locals.user.username %>
+                        </p>
+                        <% } %>
     </nav>
 
     <% if (locals.messages) { %>

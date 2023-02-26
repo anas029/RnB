@@ -10,13 +10,8 @@ const passport = require('./lib/passportConfig')
 const flash = require('express-flash')
 
 
-
-
-
-
 //middleware
 app.use(flash())
-
 
 // session
 app.use(session({
@@ -30,10 +25,10 @@ app.use(session({
 }))
 app.use(passport.initialize())
 app.use(passport.session())
-
-
-
-
+app.use((req, res, next) => {
+    res.locals = { user: req.user }
+    next()
+})
 
 //static folder
 app.use(express.static('public'))
@@ -50,15 +45,15 @@ app.use(express.urlencoded({ extended: true }))
 const indexRouter = require('./routers/index')
 const authRouter = require('./routers/auth')
 const reviewRouter = require('./routers/review')
-const userCntrl = require('./routers/user')
-const itemCntrl = require('./routers/item')
+const userRouter = require('./routers/user')
+const itemRouter = require('./routers/item')
 
 //Mount Routes
+app.use('/', indexRouter)
 app.use('/auth', authRouter)
 app.use('/review', reviewRouter)
-app.use('/', indexRouter)
-app.use('/', userCntrl)
-app.use('/', itemCntrl)
+app.use('/user', userRouter)
+app.use('/item', itemRouter)
 
 
 app.listen(PORT, () => console.log('server [RnB] is on', PORT))
