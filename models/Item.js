@@ -4,29 +4,26 @@ const itemSchema = mongoose.Schema({
     itemName: { type: String, required: true },
     description: { type: String, required: true },
     priceRate: { type: Number, required: true },
-    condition: { type: String, enum: ['new', 'good'], required: true },
-    type: { type: String, enum: ['home appliances', 'electronics', 'others'], required: true },
-    userId: [{
+    condition: { type: String, enum: ['new', 'good', 'old'], required: true },
+    type: { type: String, enum: ['home appliances', 'electronics', 'other'], required: true },
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
+    borrower: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
-    }],
-    reviews: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Review'
-    }],
-},
-
-    {
-        timetamps: true
-    })
+    },
+    isAvailable: { type: Boolean, default: true, required: true }
+}, { timetamps: true })
 
 
-// userSchema.virtual('item', {
-//     ref: 'Item',
-//     localField: '_id',
-//     foreignField: 'user'
-// })
-//Model
+itemSchema.virtual('review', {
+    ref: 'Review',
+    localField: '_id',
+    foreignField: 'item'
+})
+
 
 module.exports = mongoose.model('Item', itemSchema)
-//Exporting the model

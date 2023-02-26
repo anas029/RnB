@@ -9,6 +9,7 @@ const itemCntrl = require('../controllers/item')
 router.get('/add', itemCntrl.item_create_get)
 router.post('/add', itemCntrl.item_create_post)
 router.get('/index', itemCntrl.item_index_get)
+router.get('/details', itemCntrl.item_details_get)
 
 //exports:
 module.exports = router;

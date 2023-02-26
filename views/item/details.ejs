@@ -1,32 +1,34 @@
-<h2> <%= item.title %></h2>
+<h2>
+    <%= item.title %>
+</h2>
 
 <div>
-    content: <%= item.itemName %>
+    Name: <%= item.itemName %>
 </div>
 
 <div>
-    content: <%= item.description %>
+    Description: <%= item.description %>
 </div>
 
 <div>
-    content: <%= item.priceRate %>
+    Price rate per day: <%= item.priceRate %>
 </div>
 
 <div>
-    content: <%= item.condition %>
+    condition: <%= item.condition %>
 </div>
 
 
 <div>
-    userId: <%= item.user %>
+    owner: <%= item.owner.username %>
+</div>
+
+<div>
+    borrower: <%= item.borrower %>
 </div>
 
 <div>
     review: <%= item.review %>
-</div>
-
-<div>
-    content: <%= item.type %>
 </div>
 
 
