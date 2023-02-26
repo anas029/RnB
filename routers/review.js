@@ -6,7 +6,7 @@ const reviewCntrl = require('../controllers/review')
 
 
 //Review routes
-// router.get('/index',reviewCntrl.review_index_get)
+router.get('/',reviewCntrl.review_index_get)
 router.get('/add',reviewCntrl.review_add_get)
 router.post('/add',reviewCntrl.review_add_post)
 
