@@ -1,9 +1,9 @@
 const mongoose = require('mongoose')
 
-const itemSchema = mangoose.Schema({
-    itemName: {type,String, required: true},
-    description: {type,String,required: true},
-    priceRate: {type,Number,required: true},
+const itemSchema = mongoose.Schema({
+    itemName: {type:String, required: true},
+    description: {type:String,required: true},
+    priceRate: {type:Number,required: true},
     condition: {type:String,enum:['new','good'],required: true},
     type: {type:String,enum:['home appliances','electronics','others'],required: true},
     userId: [{
