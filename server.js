@@ -10,8 +10,14 @@ const passport = require('./lib/passportConfig')
 const flash = require('express-flash')
 
 
+
+
+
+
 //middleware
 app.use(flash())
+
+
 // session
 app.use(session({
     secret: process.env.KEY,
@@ -43,10 +49,12 @@ app.use(express.urlencoded({ extended: true }))
 // import routes
 const indexRouter = require('./routers/index')
 const authRouter = require('./routers/auth')
+const userCntrl = require('./routers/user')
 
 //Mount Routes
 app.use('/auth', authRouter)
 app.use('/', indexRouter)
+app.use('/',userCntrl);
 
 
 app.listen(PORT, () => console.log('server [RnB] is on', PORT))

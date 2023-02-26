@@ -42,4 +42,7 @@ function auth_signout_get(req, res) {
     })
 }
 
+
+
+
 module.exports = { auth_signup_get, auth_signup_post, auth_signin_get, auth_signin_post, auth_signout_get }
