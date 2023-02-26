@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 require('./config/db')
+require('dotenv').config()
 
 // Port 3000
 const PORT = process.env.PORT || 3000
@@ -20,7 +21,7 @@ app.use(flash())
 
 // session
 app.use(session({
-    secret: process.env.KEY,
+    secret: 'ghhgfhgf',
     saveUninitialized: false,
     resave: false,
     cookie: {
@@ -49,14 +50,17 @@ app.use(express.urlencoded({ extended: true }))
 // import routes
 const indexRouter = require('./routers/index')
 const authRouter = require('./routers/auth')
+
+const reviewRouter = require('./routers/review')
 const userCntrl = require('./routers/user')
 const itemCntrl = require('./routers/item')
 
+
 //Mount Routes
 app.use('/auth', authRouter)
+app.use('/review', reviewRouter)
 app.use('/', indexRouter)
 app.use('/',userCntrl)
 app.use('/',itemCntrl)
-
 
 app.listen(PORT, () => console.log('server [RnB] is on', PORT))
