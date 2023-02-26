@@ -19,16 +19,12 @@
         <a href="/user/myProfile">My profile</a>
         <a href="/item/add">Add item</a>
 
-        <% if (name) { %>
+        <% if (locals.user) { %>
             <a href="/auth/signout">sign out</a>
-            <% } else { %>
-                <a href="/auth/signin">sign in</a>
-                <a href="/auth/signup">sign up</a>
-                <% } %>
-
-                    <% if (locals.user) { %>
-                        <p>Hi <%= locals.user.username %>
-                        </p>
+            <p>Hi <%= locals.user.username %>
+                    <% } else { %>
+                        <a href="/auth/signin">sign in</a>
+                        <a href="/auth/signup">sign up</a>
                         <% } %>
     </nav>
 
