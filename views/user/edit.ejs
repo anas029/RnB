@@ -1,0 +1,33 @@
+<h2>Edit user</h2>
+
+<form method="POST" action="/user/edit">
+<div>
+    <label>User first Name</label>
+    <input name="firstName" type="text" value="<%= user.firstName %>"/>
+</div>
+
+<div>
+    <label>User Last Name</label>
+    <input name="lastName" type="text" value="<%= user.lastName %>"/>
+</div>
+
+<div>
+    <label>User Email Address</label>
+    <%= user.emailAddress %>"
+</div>
+
+<div>
+    <label>Telephone Number</label>
+    <input name="telNumber" type="text" value="<%= user.telNumber %>"/>
+</div>
+
+
+
+ 
+
+ <input type="hidden" name="id" value="<%= user._id %>"/>
+
+ <button type="submit">Edit Article</button>
+
+</form>
+

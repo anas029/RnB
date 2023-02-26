@@ -1,0 +1,28 @@
+<h1> Users list </h1>
+
+
+<table class="table table-striped">
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>User Name</th>
+        <th>Email Address</th>
+        <th>Telephone number</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+
+<% users.forEach(function(user){ %> 
+    <tr>
+        <td>
+            <a href="/user/detail?id=<%= user._id %>">
+                <%= user.username %> </a> </td>
+        <td><%= user.firstName %></td>
+        <td><%= user.lastName %></td>
+        <td><%= user.username %></td>
+        <td><%= user.emailAddress %></td>
+        <td><%= user.telNumber %></td>
+       
+    </tr>
+<% }) %>
+</table>
