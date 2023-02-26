@@ -70,6 +70,18 @@ exports.item_edit_post = (req,res)=>{
 
 }
 
+//HTTP DELETE - Item
+exports.item_delete_get = (req,res)=>{
+    Item.findByIdAndDelete(req.query.id)
+    
+    .then(()=>{
+        res.redirect("/item/index")
+    })
+    .catch(err => {
+        console.log(err);
+    })
+}
+
 
 
 

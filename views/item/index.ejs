@@ -20,6 +20,12 @@
         <td><%= item.condition %></td>
         <td><%= item.type %></td>
         <td><a href="/item/edit?id=<%=item._id%>">Edit</a></td>
+
+        <td>
+            <form method="POST" action="/item/delete?id=<%=item._id%>&_method=Delete">
+                <button type ="submit">Delete</button>
+            </form>
+            </td>
        
     </tr>
 <% }) %>
