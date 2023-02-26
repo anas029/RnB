@@ -1,11 +1,11 @@
 const mongoose = require('mongoose')
 
 const itemSchema = mongoose.Schema({
-    itemName: {type:String, required: true},
-    description: {type:String,required: true},
-    priceRate: {type:Number,required: true},
-    condition: {type:String,enum:['new','good'],required: true},
-    type: {type:String,enum:['home appliances','electronics','others'],required: true},
+    itemName: { type: String, required: true },
+    description: { type: String, required: true },
+    priceRate: { type: Number, required: true },
+    condition: { type: String, enum: ['new', 'good'], required: true },
+    type: { type: String, enum: ['home appliances', 'electronics', 'others'], required: true },
     userId: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
@@ -16,13 +16,17 @@ const itemSchema = mongoose.Schema({
     }],
 },
 
-{
-    timetamps: true
-})
+    {
+        timetamps: true
+    })
 
+
+// userSchema.virtual('item', {
+//     ref: 'Item',
+//     localField: '_id',
+//     foreignField: 'user'
+// })
 //Model
 
-const Item = mongoose.model('Item', itemSchema)
+module.exports = mongoose.model('Item', itemSchema)
 //Exporting the model
-
-module.exports = Item
