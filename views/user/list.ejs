@@ -14,7 +14,9 @@
 
 <% users.forEach(function(user){ %> 
     <tr>
-        
+        <td>
+            <a href="/user/detail?id=<%= user._id %>">
+                <%= user.username %> </a> </td>
         <td><%= user.firstName %></td>
         <td><%= user.lastName %></td>
         <td><%= user.username %></td>
