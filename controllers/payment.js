@@ -10,7 +10,7 @@ exports.payment_index_post = (req, res) => {
     .then(user => {
         user.credit+=amount
         user.save()
-        res.redirect("/payment")
+        res.redirect("/")
     })
     .catch(err => console.log(err))
 
