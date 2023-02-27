@@ -26,6 +26,36 @@ itemSchema.virtual('review', {
     localField: '_id',
     foreignField: 'item'
 })
+itemSchema.virtual('numOfReview', {
+    ref: 'Review',
+    localField: '_id',
+    foreignField: 'item',
+    count: true
+})
 
+
+itemSchema.virtual('score').get(async function () {
+    const total = await this.populate({
+        path: 'review',
+        select: 'score'
+    })
+    const sum = total.review.reduce((a, c) => a + c.score, 0)
+    let avg = sum / total.review.length;
+    console.log(avg);
+    return avg
+})
+
+// {
+//     if (currentValue !== null && currentValue !== '' && currentValue !== undefined) {
+//         return accumulator + currentValue;
+//     } else {
+//         return accumulator;
+//     }
+// }
+
+
+
+
+itemSchema.set('toObject', { virtuals: true })
 
 module.exports = mongoose.model('Item', itemSchema)
