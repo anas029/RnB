@@ -39,9 +39,13 @@ exports.item_index_get = (req, res) => {
 }
 
 exports.item_details_get = (req, res) => {
-    Item.findById(req.query.id).populate('owner').populate('borrower')
-        .then(item =>
-            res.render("item/details", { item }))
+    Item.findById(req.query.id).populate('owner').populate('borrower').populate('review')
+        .then(item => {
+            console.log('review', item.reviews)
+            console.log('num', item.numOfReview)
+            console.log('score', item.score)
+            res.render("item/details", { item })
+        })
         .catch(err => console.log(err))
 }
 exports.item_borrow_get = (req, res) => {
