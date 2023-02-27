@@ -5,11 +5,14 @@ const userSchema = mongoose.Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   username: { type: String, required: true, unique: true, lowercase: true },
+  profileImage:{type:String, default:"default.jpg"},
   emailAddress: { type: String, required: true, unique: true, lowercase: true },
   telNumber: { type: String, required: true },
   password: { type: String, required: true },
   credit: { type: Number, default: 0 },
+
 }, { timestamps: true })
+
 
 // verfiy email and password match
 userSchema.statics.verify = async function (emailAddress, password) {

@@ -6,7 +6,7 @@
         <th>Item description</th>
         <th>Item price</th>
         <th>Item condition</th>
-        <th>Item type</th>
+        <th>Payment method</th>
         <th>Edit</th>
         <th>Delete</th>
 
@@ -18,14 +18,7 @@
         <td><%= item.description %></td>
         <td><%= item.priceRate %></td>
         <td><%= item.condition %></td>
-        <td><%= item.type %></td>
-        <td><a href="/item/edit?id=<%=item._id%>">Edit</a></td>
-
-        <td>
-            <form method="POST" action="/item/delete?id=<%=item._id%>&_method=Delete">
-                <button type ="submit">Delete</button>
-            </form>
-            </td>
+       >
        
     </tr>
 <% }) %>
