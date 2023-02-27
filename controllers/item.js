@@ -5,21 +5,17 @@ const Review = require("../models/Review")
 
 // HTTP GET - Load item Form
 exports.item_create_get = (req, res, next) => {
-    var user = req.user;
-    User.findById(user)
     res.render("item/add")
 }
 
 // HTTP POST - to post the data 
 exports.item_create_post = (req, res) => {
-
-    console.log(req.body);
     const item = new Item(req.body);
     item.owner = req.user._id
     //Save Item in database 
     item.save()
         .then(() => {
-            res.redirect("/item/index");
+            res.redirect("/user/myProfile");
         })
         .catch((err) => {
             console.log(err);
@@ -29,7 +25,7 @@ exports.item_create_post = (req, res) => {
 
 //HTTP GET - index:
 exports.item_index_get = (req, res) => {
-    Item.find()
+    Item.find().populate('owner').populate('borrower').populate('review').populate('numOfReview')
         .then(items => {
             res.render("item/index", { items })
         })
@@ -39,11 +35,8 @@ exports.item_index_get = (req, res) => {
 }
 
 exports.item_details_get = (req, res) => {
-    Item.findById(req.query.id).populate('owner').populate('borrower').populate('review')
+    Item.findById(req.query.id).populate('owner').populate('borrower').populate('review').populate('numOfReview')
         .then(item => {
-            console.log('review', item.reviews)
-            console.log('num', item.numOfReview)
-            console.log('score', item.score)
             res.render("item/details", { item })
         })
         .catch(err => console.log(err))

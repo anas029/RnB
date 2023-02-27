@@ -35,7 +35,16 @@
 
 
         <div>
-            content: <%= item.score %>
+            <% if (item.numOfReview) { %>
+
+                <% let point=0%>
+                    <% for (const key in item.review) { %>
+                        <%point+= item.review[key].score %>
+                            <% } %>
+                                <%= Math.round((point/ item.review.length)*10)/10%>
+                                    <% } else { %>
+                                        -
+                                        <% } %>
         </div>
         <div>
             <% if (item.isAvailable) { %>

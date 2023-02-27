@@ -5,7 +5,7 @@ const userSchema = mongoose.Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   username: { type: String, required: true, unique: true, lowercase: true },
-  profileImage:{type:String, default:"default.jpg"},
+  profileImage: { type: String, default: "default.jpg" },
   emailAddress: { type: String, required: true, unique: true, lowercase: true },
   telNumber: { type: String, required: true },
   password: { type: String, required: true },
@@ -57,6 +57,16 @@ userSchema.virtual('borrowedItem', {
   localField: '_id',
   foreignField: 'borrower'
 })
+
+// userSchema.virtual('points').get(async function () {
+//   let test = await this.populate({
+//     path: 'item',
+//     select: 'numOfReview'
+//   })
+//   console.log(test)
+//   return test
+// })
+
 
 userSchema.set('toObject', { virtuals: true })
 

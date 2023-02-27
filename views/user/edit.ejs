@@ -1,41 +1,47 @@
 <h2>Edit user</h2>
 
+<form action="/user/edit/img" method="post" enctype="multipart/form-data">
+    <img src="/images/profile/<%= user.profileImage %>" alt="profile picture" width="200" height="200">
+    <input type="file" name="profileImage" id="">
+    <button type="submit">Update image</button>
+</form>
 <form method="POST" action="/user/edit">
-  
-<div>
-    <label>User first Name</label>
-    <input name="firstName" type="text" value="<%= user.firstName %>"/>
-</div>
 
-<div>
-    <label>User Last Name</label>
-    <input name="lastName" type="text" value="<%= user.lastName %>"/>
-</div>
+    <div>
+        <label>First Name</label>
+        <input name="firstName" type="text" value="<%= user.firstName %>" />
+    </div>
 
-<div>
-    <label>User Email Address</label>
-    <%= user.emailAddress %>"
-</div>
+    <div>
+        <label>Last Name</label>
+        <input name="lastName" type="text" value="<%= user.lastName %>" />
+    </div>
 
-<div>
-    <label>Telephone Number</label>
-    <input name="telNumber" type="text" value="<%= user.telNumber %>"/>
-</div>
+    <div>
+        <label>Email Address</label>
+        <input name="email" type="text" value="<%= user.emailAddress %>" disabled />
 
+    </div>
 
-
- 
-
- <input type="hidden" name="id" value="<%= user._id %>"/>
-
- <button type="submit">Edit User</button>
+    <div>
+        <label>Telephone Number</label>
+        <input name="telNumber" type="text" value="<%= user.telNumber %>" />
+    </div>
+    <button type="submit">Update info</button>
 
 </form>
+<form action="" method="post">
+    <label for="oldPassword">Current password</label>
+    <input type="password" name="password" id=" ">
+    <label for="NewPassword">New password</label>
+    <input type="password" name="newPassword" id=" ">
+    <input type="password" name="newPassword2" id=" ">
+    <button type="submit">Change password</button>
+</form>
 
-<form action="/upload/profile" method="post" enctype="multipart/form-data">
+<!-- <form action="/upload/profile" method="post" enctype="multipart/form-data">
     <input type="file" name="profileImage" id="">
 
-    <input type="hidden" name="id" value="<%= user._id %>"/>
+    <input type="hidden" name="id" value="<%= user._id %>" />
     <button type="submit">submit</button>
-</form>
-
+</form> -->
