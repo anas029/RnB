@@ -16,7 +16,7 @@ exports.user_profile_get = (req, res) => {
 
 //HTTP GET - profile by ID :
 exports.user_detail_get = (req, res) => {
-    User.findById(req.query.id).populate('item')
+    User.findById(req.query.id).populate('item').populate('borrowedItem')
         .then(user => {
             res.render("user/detail", { user });
         })

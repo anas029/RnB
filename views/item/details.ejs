@@ -22,16 +22,30 @@
 <div>
     owner: <%= item.owner.username %>
 </div>
+<% if (!item.isAvailable) { %>
 
-<div>
-    borrower: <%= item.borrower %>
-</div>
+    <div>
+        borrower: <%= item.borrower.username %>
+    </div>
+    <% } %>
 
-<div>
-    review: <%= item.review %>
-</div>
+        <div>
+            review: <%= item.review %>
+        </div>
 
 
-<div>
-    content: <%= item.score %>
-</div>
+        <div>
+            content: <%= item.score %>
+        </div>
+        <div>
+            <% if (item.isAvailable) { %>
+                <a href="/item/borrow?id=<%= item._id %>">borrow</a>
+                <% } else { %>
+                    <a href="/item/return?id=<%= item._id %>">return</a>
+                    <%= item.borrowDate %>
+                        <% } %>
+        </div>
+
+        <div>
+            review: <%= item.review %>
+        </div>

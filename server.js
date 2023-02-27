@@ -47,6 +47,7 @@ const authRouter = require('./routers/auth')
 const reviewRouter = require('./routers/review')
 const userRouter = require('./routers/user')
 const itemRouter = require('./routers/item')
+const paymentRouter = require('./routers/payment')
 
 //Mount Routes
 app.use('/', indexRouter)
@@ -54,6 +55,7 @@ app.use('/auth', authRouter)
 app.use('/review', reviewRouter)
 app.use('/user', userRouter)
 app.use('/item', itemRouter)
+app.use('/payment', paymentRouter)
 
 
 app.listen(PORT, () => console.log('server [RnB] is on', PORT))
