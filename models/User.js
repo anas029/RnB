@@ -42,7 +42,7 @@ userSchema.statics.isValid = async function ({ firstName, lastName, username, em
   if (await this.findOne({ emailAddress: emailAddressL }))
     throw Error('Email already registered')
   if (!validator.isStrongPassword(password))
-    throw Error('Password is weak. Password must be 8 character long and contain a lowercase, an uppercase, a number and a symbol')
+    throw Error('Password is weak.')
   const hash = bcrypt.hashSync(password, 10)
   return { firstName, lastName, username: usernameL, emailAddress: emailAddressL, telNumber, password: hash }
 }
@@ -55,16 +55,18 @@ userSchema.statics.changePassword = async function ({ id, password, newPassword1
   console.log(newPassword2);
   if (newPassword1 !== newPassword2)
     throw Error('New password mismatch')
+  if (!validator.isStrongPassword(newPassword1))
+    throw Error('Password is weak.')
   const user = await this.findById(id)
   if (!user)
     throw Error('Sign in!')
   const match = bcrypt.compareSync(password, user.password)
   if (!match)
     throw Error('Incorrect password')
-  const hash = bcrypt.hashSync(password, 10)
+  const hash = bcrypt.hashSync(newPassword1, 10)
   user.password = hash
-  user.save()
-    .then(() => { return user })
+  await user.save()
+    .then(console.log('changed'))
     .catch(() => { throw Error('Try again') })
 }
 userSchema.virtual('item', {

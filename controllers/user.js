@@ -108,7 +108,7 @@ function user_updatePassword_post(req, res) {
     data.id = req.user.id
     console.log(data)
     User.changePassword(data)
-        .then(res.redirect('/user/myProfile'))
+        .then(res.redirect('/auth/signout'))
         .catch(err => {
             console.log(err.message);
         })
