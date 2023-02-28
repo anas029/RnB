@@ -5,7 +5,7 @@ const userSchema = mongoose.Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   username: { type: String, required: true, unique: true, lowercase: true },
-  profileImage:{type:String, default:"default.jpg"},
+  profileImage: { type: String, default: "default.jpg" },
   emailAddress: { type: String, required: true, unique: true, lowercase: true },
   telNumber: { type: String, required: true },
   password: { type: String, required: true },
@@ -58,66 +58,7 @@ userSchema.virtual('borrowedItem', {
   foreignField: 'borrower'
 })
 
+
 userSchema.set('toObject', { virtuals: true })
 
-// item: [{ type: mongoose.Schema.Types.ObjectId, refPath: 'Item' }],
-// review: [{ type: mongoose.Schema.Types.ObjectId, refPath: 'Review' }],
-
-// userSchema.virtual('score').get(async () => {
-//     const total = await this.populate({ path: 'item', select: 'score' })
-/*
-
-authors = await Author.
-find({}).
-// Works, foreign field `author` is selected
-populate({ path: 'posts', select: 'title author' }).
-exec();
-
-AuthorSchema.virtual('posts', {
-ref: 'BlogPost',
-localField: '_id',
-foreignField: 'author',
-match: { archived: false } // match option with basic query selector
-});
-
-*/
-
-/*
-User.find({})
-  .populate({
-    path: 'items',
-    populate: {
-      path: 'comments',
-      model: 'Comment'
-    }
-  })
-  .exec((err, users) => {
-    if (err) {
-      console.error(err);
-    } else {
-      console.log(users);
-    }
-  });
-*/
-
-// })
-// userSchema.virtual('item', {
-//     ref: 'Item',
-//     localField: '_id',
-//     foreignField: 'user'
-// })
-// userSchema.virtual('review', {
-//     ref: 'Review',
-//     localField: '_id',
-//     foreignField: 'user'
-// })
-
-// userSchema.virtual('score').get(() => {
-//     return this.populate({
-//         {path: 'item',select: 'review'},
-//         populate: { path: 'review' }
-//     })
-// })
-
-// exporting User Model
 module.exports = mongoose.model('User', userSchema)

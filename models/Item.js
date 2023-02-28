@@ -3,8 +3,9 @@ const mongoose = require('mongoose')
 const itemSchema = mongoose.Schema({
     itemName: { type: String, required: true },
     description: { type: String, required: true },
+    itemImage: { type: String, default: "default.jpg" },
     priceRate: { type: Number, required: true },
-    dopiste: { type: Number, required: true },
+    deposit: { type: Number, required: true },
     condition: { type: String, enum: ['new', 'good', 'old'], required: true },
     type: { type: String, enum: ['home appliances', 'electronics', 'other'], required: true },
     owner: {
@@ -32,29 +33,6 @@ itemSchema.virtual('numOfReview', {
     foreignField: 'item',
     count: true
 })
-
-
-itemSchema.virtual('score').get(async function () {
-    const total = await this.populate({
-        path: 'review',
-        select: 'score'
-    })
-    const sum = total.review.reduce((a, c) => a + c.score, 0)
-    let avg = sum / total.review.length;
-    console.log(avg);
-    return avg
-})
-
-// {
-//     if (currentValue !== null && currentValue !== '' && currentValue !== undefined) {
-//         return accumulator + currentValue;
-//     } else {
-//         return accumulator;
-//     }
-// }
-
-
-
 
 itemSchema.set('toObject', { virtuals: true })
 

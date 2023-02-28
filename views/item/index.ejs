@@ -1,37 +1,81 @@
 <h1> item list </h1>
+<% items.forEach(function(item){ %>
+    <a href="/item/details?id=<%= item._id %>">
+        <div>
 
-<table class="table table-striped">
-    <tr>
-        <th>Item Name</th>
-        <th>Item description</th>
-        <th>Item price</th>
-        <th>Item condition</th>
-        <th>review</th>
-        <th>score</th>
-        <th>Edit</th>
-        <th>Delete</th>
-    </tr>
+            item name
+            <%= item.itemName %>
+                <br>
 
-    <% items.forEach(function(item){ %>
-        <tr>
-            <td>
-                <%= item.itemName %>
-            </td>
-            <td>
+
+                description
                 <%= item.description %>
-            </td>
-            <td>
-                <%= item.priceRate %>
-            </td>
-            <td>
-                <%= item.condition %>
-            </td>
-            <td>
-                <%= item.review %>
-            </td>
-            <td>
-                <%= item.score %>
-            </td>
-        </tr>
-        <% }) %>
-</table>
+                    <br>
+
+                    priceRate
+                    <%= item.priceRate %>
+
+                        <br>
+
+                        condition
+                        <%= item.condition %>
+
+                            <br>
+
+                            review
+                            <%= item.review %>
+
+
+                                <br>
+                                numOfReview <%= item.numOfReview %>
+
+                                    <br>
+
+
+
+        </div>
+    </a>
+    <br><br>
+    <% }) %>
+
+
+
+
+        <table class="table table-striped">
+            <tr>
+                <th>Item Name</th>
+                <th>Item description</th>
+                <th>Item price</th>
+                <th>Item condition</th>
+                <th>review</th>
+                <th>score</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+
+            <% items.forEach(function(item){ %>
+                <tr>
+                    <td>
+                        <%= item.itemName %>
+                    </td>
+                    <td>
+                        <%= item.description %>
+                    </td>
+                    <td>
+                        <%= item.priceRate %>
+                    </td>
+                    <td>
+                        <%= item.condition %>
+                    </td>
+                    <td>
+                        <%= item.review %>
+                    </td>
+                    <td>
+                        numOfReview <%= item.numOfReview %>
+                    </td>
+                    <td>
+                        <%= item.score %>
+                    </td>
+                </tr>
+                <% }) %>
+        </table>

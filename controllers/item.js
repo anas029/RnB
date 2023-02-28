@@ -4,32 +4,46 @@ const User = require("../models/User")
 const Review = require("../models/Review")
 
 // HTTP GET - Load item Form
-exports.item_create_get = (req, res, next) => {
-    var user = req.user;
-    User.findById(user)
+function item_create_get(req, res) {
     res.render("item/add")
+}
+// HTTP GET - Load item Form
+function item_addImg_get(req, res) {
+    res.render("item/addImg")
 }
 
 // HTTP POST - to post the data 
-exports.item_create_post = (req, res) => {
-
-    console.log(req.body);
+function item_create_post(req, res) {
     const item = new Item(req.body);
     item.owner = req.user._id
-    //Save Item in database 
     item.save()
         .then(() => {
-            res.redirect("/item/index");
+            res.render("item/addImg", { item });
         })
         .catch((err) => {
             console.log(err);
             res.send("Please try again later!!!");
         })
 }
+// HTTP POST - to post the data 
+function item_addImg_post(req, res) {
+    Item.findById(req.query.id).populate('owner')
+        .then(item => {
+            if (item.owner.id == req.user._id) {
+                item.itemImage = req.file.filename
+                item.save()
+                    .then(res.redirect('/user/myProfile'))
+                    .catch(e => res.send(e.message))
+            } else {
+                res.redirect('/auth/signin')
+            }
+        })
+        .catch(e => res.send(e.message))
+}
 
 //HTTP GET - index:
-exports.item_index_get = (req, res) => {
-    Item.find()
+function item_index_get(req, res) {
+    Item.find().populate('owner').populate('borrower').populate('review').populate('numOfReview')
         .then(items => {
             res.render("item/index", { items })
         })
@@ -38,17 +52,14 @@ exports.item_index_get = (req, res) => {
         })
 }
 
-exports.item_details_get = (req, res) => {
-    Item.findById(req.query.id).populate('owner').populate('borrower').populate('review')
+function item_details_get(req, res) {
+    Item.findById(req.query.id).populate('owner').populate('borrower').populate('review').populate('numOfReview')
         .then(item => {
-            console.log('review', item.reviews)
-            console.log('num', item.numOfReview)
-            console.log('score', item.score)
-            res.render("item/details", { item })
+            res.render("item/details", { item, user: req.user })
         })
         .catch(err => console.log(err))
 }
-exports.item_borrow_get = (req, res) => {
+function item_borrow_get(req, res) {
     Item.findById(req.query.id).populate('owner').populate('borrower')
         .then(item => {
             if (item.isAvailable)
@@ -56,7 +67,7 @@ exports.item_borrow_get = (req, res) => {
         })
         .catch(err => console.log(err))
 }
-exports.item_borrow_post = (req, res) => {
+function item_borrow_post(req, res) {
     Item.findById(req.query.id)
         .then(item => {
             if (item.isAvailable) {
@@ -74,7 +85,7 @@ exports.item_borrow_post = (req, res) => {
         })
         .catch(err => console.log(err))
 }
-exports.item_return_get = (req, res) => {
+function item_return_get(req, res) {
     Item.findById(req.query.id).populate('owner').populate('borrower')
         .then(item => {
             if (!item.isAvailable)
@@ -82,7 +93,8 @@ exports.item_return_get = (req, res) => {
         })
         .catch(err => console.log(err))
 }
-exports.item_return_post = (req, res) => {
+
+function item_return_post(req, res) {
     Item.findById(req.query.id)
         .then(item => {
             if (!item.isAvailable) {
@@ -110,23 +122,15 @@ exports.item_return_post = (req, res) => {
         })
         .catch(err => console.log(err))
 }
-
-/*
-const Character = mongoose.model('Character', new mongoose.Schema({
-  name: String,
-  age: Number
-}));
-
-await Character.create({ name: 'Jean-Luc Picard' });
-
-const filter = { name: 'Jean-Luc Picard' };
-const update = { age: 59 };
-
-// `doc` is the document _before_ `update` was applied
-let doc = await Character.findOneAndUpdate(filter, update);
-doc.name; // 'Jean-Luc Picard'
-doc.age; // undefined
-
-doc = await Character.findOne(filter);
-doc.age; // 59
-*/
+module.exports = {
+    item_create_get,
+    item_addImg_get,
+    item_create_post,
+    item_addImg_post,
+    item_index_get,
+    item_details_get,
+    item_borrow_get,
+    item_borrow_post,
+    item_return_get,
+    item_return_post,
+}

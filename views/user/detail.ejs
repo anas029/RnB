@@ -1,5 +1,8 @@
 <h1> Users detail </h1>
+<div>
+  <img src="/images/profile/<%= user.profileImage %>" alt="profile picture" width="200" height="200">
 
+</div>
 <div>
   User first Name: <%= user.firstName %>
 
@@ -21,6 +24,27 @@
 
   User credit amount :<%= user.credit %>
 </div>
+<div>
+
+  points:
+  <% let point=0%>
+    <% let total=0%>
+
+      <% for (const key in user.item) { %>
+        <% if (user.item[key].numOfReview) { %>
+          <% for (const index in user.item[key].review) { %>
+            <%point+= user.item[key].review[index].score %>
+              <%total++ %>
+                <% } %>
+                  <% } %>
+                    <% } %>
+                      <% if (total) { %>
+                        <%=`${Math.round(( point/total)*10)/10}, number of reviews: ${total}` %>
+                          <% } else { %>
+                            no reviews
+                            <% } %>
+</div>
+<hr>
 <div>
   <% for( let key in user.item ) { %>
     <a href="/item/details?id=<%= user.item[key]._id %>">

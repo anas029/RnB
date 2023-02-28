@@ -1,29 +1,90 @@
 <h1> Users detail </h1>
 
 <div>
-  <img src="/images/profile/<%= user.profileImage %>"alt="profile picture" width="200" height="200">
-  
-</div>
-<div>
-  User first Name: <%= user.firstName %>
+  <img src="/images/profile/<%= user.profileImage %>" alt="profile picture" width="200" height="200">
 
 </div>
 <div>
-  User Last Name: <%= user.lastName %>
+  first Name: <%= user.firstName %>
+
 </div>
 <div>
-  user Name:<%= user.username %>
+  Last Name: <%= user.lastName %>
+</div>
+<div>
+  Name:<%= user.username %>
 </div>
 
 
 <div>
-  User email Address: <%= user.emailAddress %>
+  email Address: <%= user.emailAddress %>
 </div>
 <div>
 
-  User telephone Number :<%= user.telNumber %>
+  telephone Number :<%= user.telNumber %>
+</div>
+<div>credit amount :<%= user.credit %>
+</div>
+<div>
+
+  points:
+  <% let point=0%>
+    <% let total=0%>
+
+      <% for (const key in user.item) { %>
+        <% for (const index in user.item[key].review) { %>
+          <%point+= user.item[key].review[index].score %>
+            <%total++ %>
+              <% } %>
+                <% } %>
+                  <%=`${Math.round(( point/total)*10)/10}, number of reviews: ${total}` %>
+
+
+
+
+
 </div>
 
 
-<td><a href="/user/edit?id=<%=user._id%>">Edit</a></td>
-<a href="/item/add?id=<%=user._id%>">List a new Item</a>
+<a href="/user/edit">
+  <div>Edit</div>
+</a>
+<a href="/item/add">
+  <div>List a new Item</div>
+</a>
+<a href="/payment">
+  <div>Add credit</div>
+</a>
+<br>
+<hr>
+<div>
+  <% for( let key in user.item ) { %>
+    <div>
+
+      <div>
+        <p>
+          <img src="/images/items/<%= user.item[key].itemImage %>" alt="item picture" width="200" height="200">
+        </p>
+        <p>
+          item title: <%= user.item[key].itemName %>
+        </p>
+      </div>
+
+      <a href="/item/details?id=<%= user.item[key]._id %>"><input type="button" value="view"></a>
+      <a href="/item/details?id=<%= user.item[key]._id %>"><input type="button" value="edit"></a>
+      <a href="/item/details?id=<%= user.item[key]._id %>"><input type="button" value="delete"></a>
+    </div>
+    <hr>
+    <% } %>
+</div>
+<br>
+<hr>
+<div>
+  <% for( let key in user.borrowedItem ) { %>
+    <a href="/item/details?id=<%= user.borrowedItem[key]._id %>">
+      <p>
+        <%= user.borrowedItem[key].itemName %>
+      </p>
+    </a>
+    <% } %>
+</div>

@@ -13,5 +13,6 @@ const reviewSchema = new mongoose.Schema({
     },
 }, { timetamps: true }
 )
+reviewSchema.set('toObject', { virtuals: true })
 
 module.exports = mongoose.model('Review', reviewSchema)
