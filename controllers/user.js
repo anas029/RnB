@@ -3,13 +3,8 @@ const User = require('../models/User')
 
 //HTTP GET - my profile :
 function user_myProfile_get(req, res, next) {
-    User.findById(req.user._id).populate({ path: 'item', populate: { path: 'review' } })
-        // .populate({
-        //     path: 'b', populate: { path: 'c', select: 'score' }
-        // .populate('item').populate('borrowedItem')
+    User.findById(req.user._id).populate({ path: 'item', populate: { path: 'review' } }).populate('borrowedItem')
         .then(user => {
-            // user.populate('item', populate('review'))
-
             res.render("user/myProfile", { user });
         })
         .catch(err => {
@@ -67,11 +62,6 @@ function user_editPass_post(req, res) {
 
 }
 
-
-
-
-
-
 //HTTP GET - user profile by ID :
 function user_detail_get(req, res) {
     User.findById(req.query.id).populate({ path: 'item', populate: { path: 'review' } }).populate({ path: 'item', populate: { path: 'numOfReview' } }).populate('borrowedItem')
@@ -82,15 +72,6 @@ function user_detail_get(req, res) {
             console.log(err);
         })
 }
-
-
-
-
-
-
-
-
-
 
 //HTTP GET - All profile:
 function user_profile_get(req, res) {
@@ -113,10 +94,6 @@ function user_updatePassword_post(req, res) {
             console.log(err.message);
         })
 }
-
-
-
-
 
 module.exports = {
     user_edit_post,
