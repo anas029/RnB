@@ -48,18 +48,24 @@ userSchema.statics.isValid = async function ({ firstName, lastName, username, em
 }
 
 // change password
-userSchema.statics.verify = async function (id, password, newPassword1, newPassword2) {
+userSchema.statics.changePassword = async function ({ id, password, newPassword1, newPassword2 }) {
   if (!password || !newPassword1 || !newPassword2)
     throw Error('All fields must be filled')
-  if (newPassword1 === newPassword2)
+  console.log(newPassword1);
+  console.log(newPassword2);
+  if (newPassword1 !== newPassword2)
     throw Error('New password mismatch')
   const user = await this.findById(id)
   if (!user)
-    throw Error('Incorrect email')
+    throw Error('Sign in!')
   const match = bcrypt.compareSync(password, user.password)
   if (!match)
     throw Error('Incorrect password')
-  return user
+  const hash = bcrypt.hashSync(password, 10)
+  user.password = hash
+  user.save()
+    .then(() => { return user })
+    .catch(() => { throw Error('Try again') })
 }
 userSchema.virtual('item', {
   ref: 'Item',

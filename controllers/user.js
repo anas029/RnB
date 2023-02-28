@@ -102,6 +102,17 @@ function user_profile_get(req, res) {
             console.log(err);
         })
 }
+//HTTP GET - All profile:
+function user_updatePassword_post(req, res) {
+    const data = req.body
+    data.id = req.user.id
+    console.log(data)
+    User.changePassword(data)
+        .then(res.redirect('/user/myProfile'))
+        .catch(err => {
+            console.log(err.message);
+        })
+}
 
 
 
@@ -115,5 +126,6 @@ module.exports = {
     user_detail_get,
     user_profile_get,
     user_profile_get,
-    user_editImg_post
+    user_editImg_post,
+    user_updatePassword_post
 }

@@ -10,7 +10,7 @@ router.get('/myProfile', isLoggedIn, userCntrl.user_myProfile_get)
 router.get('/edit', isLoggedIn, userCntrl.user_edit_get)
 router.post('/edit', isLoggedIn, userCntrl.user_edit_post)
 router.post('/edit/img', isLoggedIn, upload.single('profileImage'), userCntrl.user_editImg_post)
-router.post('/edit/password', isLoggedIn, userCntrl.user_editPass_post)
+router.post('/edit/password', isLoggedIn, userCntrl.user_updatePassword_post)
 router.get('/detail', userCntrl.user_detail_get)
 
 
