@@ -23,6 +23,8 @@
 
   telephone Number :<%= user.telNumber %>
 </div>
+<div>credit amount :<%= user.credit %>
+</div>
 <div>
 
   points:
@@ -50,15 +52,29 @@
 <a href="/item/add">
   <div>List a new Item</div>
 </a>
+<a href="/payment">
+  <div>Add credit</div>
+</a>
 <br>
 <hr>
 <div>
   <% for( let key in user.item ) { %>
-    <a href="/item/details?id=<%= user.item[key]._id %>">
-      <p>
-        <%= user.item[key].itemName %>
-      </p>
-    </a>
+    <div>
+
+      <div>
+        <p>
+          <img src="/images/items/<%= user.item[key].itemImage %>" alt="item picture" width="200" height="200">
+        </p>
+        <p>
+          item title: <%= user.item[key].itemName %>
+        </p>
+      </div>
+
+      <a href="/item/details?id=<%= user.item[key]._id %>"><input type="button" value="view"></a>
+      <a href="/item/details?id=<%= user.item[key]._id %>"><input type="button" value="edit"></a>
+      <a href="/item/details?id=<%= user.item[key]._id %>"><input type="button" value="delete"></a>
+    </div>
+    <hr>
     <% } %>
 </div>
 <br>

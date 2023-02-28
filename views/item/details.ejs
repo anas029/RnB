@@ -1,7 +1,10 @@
 <h2>
     <%= item.title %>
 </h2>
+<div>
+    <img src="/images/items/<%= item.itemImage %>" alt="item picture" width="200" height="200">
 
+</div>
 <div>
     Name: <%= item.itemName %>
 </div>
@@ -29,10 +32,6 @@
     </div>
     <% } %>
 
-        <div>
-            review: <%= item.review %>
-        </div>
-
 
         <div>
             <% if (item.numOfReview) { %>
@@ -47,14 +46,12 @@
                                         <% } %>
         </div>
         <div>
-            <% if (item.isAvailable) { %>
-                <a href="/item/borrow?id=<%= item._id %>">borrow</a>
-                <% } else { %>
-                    <a href="/item/return?id=<%= item._id %>">return</a>
-                    <%= item.borrowDate %>
-                        <% } %>
-        </div>
-
-        <div>
-            review: <%= item.review %>
+            <% if ((!user)||item.owner.id.toString() !==user._id.toString()) { %>
+                <% if (item.isAvailable) { %>
+                    <a href="/item/borrow?id=<%= item._id %>">borrow</a>
+                    <% } else { %>
+                        <a href="/item/return?id=<%= item._id %>">return</a>
+                        <%= item.borrowDate %>
+                            <% } %>
+                                <% } %>
         </div>

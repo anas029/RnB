@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const itemSchema = mongoose.Schema({
     itemName: { type: String, required: true },
     description: { type: String, required: true },
+    itemImage: { type: String, default: "default.jpg" },
     priceRate: { type: Number, required: true },
     deposit: { type: Number, required: true },
     condition: { type: String, enum: ['new', 'good', 'old'], required: true },

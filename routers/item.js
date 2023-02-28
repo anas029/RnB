@@ -6,10 +6,11 @@ router.use(express.urlencoded({ extended: true }))
 const itemCntrl = require('../controllers/item')
 const upload = require('../lib/upload')
 
-
 //Call API
 router.get('/add', isLoggedIn, itemCntrl.item_create_get)
-router.post('/add', isLoggedIn, upload.single('itemImage'), itemCntrl.item_create_post)
+router.post('/add', isLoggedIn, itemCntrl.item_create_post)
+router.get('/addimg', isLoggedIn, itemCntrl.item_addImg_get)
+router.post('/addimg', isLoggedIn, upload.single('itemImage'), itemCntrl.item_addImg_post)
 router.get('/index', itemCntrl.item_index_get)
 router.get('/details', itemCntrl.item_details_get)
 router.get('/borrow', isLoggedIn, itemCntrl.item_borrow_get)
