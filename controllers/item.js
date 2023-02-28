@@ -3,29 +3,6 @@ const Item = require("../models/Item")
 const User = require("../models/User")
 const Review = require("../models/Review")
 
-<<<<<<< HEAD
-// HTTP GET - Load item Form
-exports.item_create_get = (req, res, next) => {
-    res.render("item/add")
-}
-
-// HTTP POST - to post the data 
-exports.item_create_post = (req, res) => {
-    console.log(req.file.filename)
-    const item = new Item(req.body);
-    item.owner = req.user._id
-    //Save Item in database 
-    item.save()
-        .then(() => {
-            res.redirect("/user/myProfile");
-        })
-        .catch((err) => {
-            console.log(err);
-            res.send("Please try again later!!!");
-        })
-}
-=======
->>>>>>> b5b2e9ca5238599323f3664c6d648f9fa7dd84b9
 
 //HTTP GET - index:
 function item_index_get(req, res) {
@@ -155,8 +132,6 @@ function item_return_post(req, res) {
             }
         })
         .catch(err => console.log(err))
-<<<<<<< HEAD
-=======
 }
 //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\//
 // EDIT
@@ -298,5 +273,4 @@ module.exports = {
     item_delete_get,
     item_edit2_post,
     item_edit2_get
->>>>>>> b5b2e9ca5238599323f3664c6d648f9fa7dd84b9
 }
