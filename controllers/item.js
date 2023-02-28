@@ -10,6 +10,7 @@ exports.item_create_get = (req, res, next) => {
 
 // HTTP POST - to post the data 
 exports.item_create_post = (req, res) => {
+    console.log(req.file.filename)
     const item = new Item(req.body);
     item.owner = req.user._id
     //Save Item in database 
@@ -103,23 +104,3 @@ exports.item_return_post = (req, res) => {
         })
         .catch(err => console.log(err))
 }
-
-/*
-const Character = mongoose.model('Character', new mongoose.Schema({
-  name: String,
-  age: Number
-}));
-
-await Character.create({ name: 'Jean-Luc Picard' });
-
-const filter = { name: 'Jean-Luc Picard' };
-const update = { age: 59 };
-
-// `doc` is the document _before_ `update` was applied
-let doc = await Character.findOneAndUpdate(filter, update);
-doc.name; // 'Jean-Luc Picard'
-doc.age; // undefined
-
-doc = await Character.findOne(filter);
-doc.age; // 59
-*/
