@@ -54,6 +54,18 @@ function user_editImg_post(req, res) {
         })
 
 }
+// HTTP POST - Update user passwword
+function user_editPass_post(req, res) {
+    User.findByIdAndUpdate(req.user._id, { profileImage: req.file.filename })
+        .then(() => {
+            res.redirect("/user/myProfile");
+        })
+        .catch((err) => {
+            console.log(err);
+            res.send("Please try again later!!!");
+        })
+
+}
 
 
 
