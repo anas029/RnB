@@ -14,9 +14,6 @@ router.get('/detail', userCntrl.user_detail_get)
 
 
 router.get('/list', userCntrl.user_profile_get)
-// router.get('/profile/:id',userCntrl.user_profile_get)
-
-
 
 //exports:
 module.exports = router;
