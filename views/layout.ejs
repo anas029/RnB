@@ -11,15 +11,11 @@
 </head>
 
 <body>
-    Layout
     <nav>
-        <a href="/">home</a>
-        <a href="/home/another">another</a>
-        <a href="/user/list">Users list</a>
-        <a href="/user/myProfile">My profile</a>
-        <a href="/item/add">Add item</a>
-
+        <a href="/">Home</a>
+        <a href="/item/index">Browse</a>
         <% if (locals.user) { %>
+            <a href="/user/myProfile">My profile</a>
             <a href="/auth/signout">sign out</a>
             <p>Hi <%= locals.user.username %>
                     <% } else { %>
