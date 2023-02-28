@@ -1,4 +1,25 @@
-<h2>Edit user</h2>
+<style>
+    img{
+        border-radius: 50%;
+        align-items:center ;
+      
+  
+    }
+    .edit{ 
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column ;
+    }
+</style>
+    
+
+<div id="edit">
+    <h2 id="edit">Edit user</h2>
+
+</div>
+
 
 <form action="/user/edit/img" method="post" enctype="multipart/form-data">
     <img src="/images/profile/<%= user.profileImage %>" alt="profile picture" width="200" height="200">
