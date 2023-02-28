@@ -22,7 +22,7 @@
                                 <% } %>
 </div>
 <div>
-    <% if (item.owner.id.toString()===user._id.toString()) { %>
+    <% if (user&&item.owner.id.toString()===user._id.toString()) { %>
         <% if (!item.isAvailable) { %>
             borrower: <%= item.borrower.username %>
                 borrowed date <%= item.borrowDate %>
