@@ -32,6 +32,7 @@ itemSchema.virtual('numOfReview', {
     foreignField: 'item',
     count: true
 })
+
 itemSchema.set('toObject', { virtuals: true })
 
 module.exports = mongoose.model('Item', itemSchema)
