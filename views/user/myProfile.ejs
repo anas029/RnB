@@ -98,3 +98,99 @@
           <p>no borrowed item</p>
           <% } %>
 </div>
+
+<section style="background-color: #eee;">
+  <div class="container py-5">
+    
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card mb-4">
+          <div class="card-body text-center">
+            <img src="/images/profile/<%= user.profileImage %>" alt="profile picture" width="200" height="200" alt="profile image"
+              class="rounded-circle img-fluid" style="width: 150px;">
+            <h5 class="my-3"><%= `${user.firstName} ${user.lastName}` %></h5>
+            <h4 class="my-3"><%= user.username %></h4>
+            
+            <div class="d-flex justify-content-center mb-2">
+              <a href="/user/edit" type="button"  class="btn btn-outline-primary ms-1">Edit profile</a>
+              <a href="/item/add" type="button" class="btn btn-outline-primary ms-1">list a new item</a>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      <div class="col-lg-8">
+        <div class="card mb-4">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">User Name</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0"><%= `${user.firstName} ${user.lastName}` %></p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Email</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0"><%= user.emailAddress %></p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Mobile Number</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0"><%= user.telNumber %></p>
+              </div>
+            </div>
+            <hr>        
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Credit</p>
+              </div>
+              <div class="col-sm-3">
+                <p class="text-muted mb-0"><%= user.credit %></p>
+              </div>
+            </div>
+          </div>
+          </div>
+            <div >
+              <div class="row">
+                    <div class="col-sm-6">
+                         <% if (Object.keys(user.item).length) { %>
+                          <% for( let key in user.item ) { %>
+              
+                <div class="card" style="width: 18rem;">
+                  <img src="/images/items/<%= user.item[key].itemImage %>" class="card-img-top" alt="item picture">
+                  <div class="card-body">
+                    <h5 class="card-title"><%= user.item[key].itemName %></h5>
+                </div>
+                <a href="/item/details?id=<%= user.item[key]._id %>" class="btn btn-primary">View</a>
+                <a href="/item/details?id=<%= user.item[key]._id %>" class="btn btn-primary">Edit</a>
+                <a href="/item/details?id=<%= user.item[key]._id %>" class="btn btn-primary">delete</a>
+                             
+              
+              </div>
+              <hr>
+              <% } %>
+              <% } else { %>
+                <p>no item listed yet</p>
+                <% } %>   
+              
+            </div>
+          </div>
+        </div>
+
+
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</section>
