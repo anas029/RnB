@@ -3,13 +3,8 @@ const User = require('../models/User')
 
 //HTTP GET - my profile :
 function user_myProfile_get(req, res, next) {
-    User.findById(req.user._id).populate({ path: 'item', populate: { path: 'review' } })
-        // .populate({
-        //     path: 'b', populate: { path: 'c', select: 'score' }
-        // .populate('item').populate('borrowedItem')
+    User.findById(req.user._id).populate({ path: 'item', populate: { path: 'review' } }).populate('borrowedItem')
         .then(user => {
-            // user.populate('item', populate('review'))
-
             res.render("user/myProfile", { user });
         })
         .catch(err => {
@@ -54,11 +49,18 @@ function user_editImg_post(req, res) {
         })
 
 }
+// HTTP POST - Update user passwword
+function user_editPass_post(req, res) {
+    User.findByIdAndUpdate(req.user._id, { profileImage: req.file.filename })
+        .then(() => {
+            res.redirect("/user/myProfile");
+        })
+        .catch((err) => {
+            console.log(err);
+            res.send("Please try again later!!!");
+        })
 
-
-
-
-
+}
 
 //HTTP GET - user profile by ID :
 function user_detail_get(req, res) {
@@ -71,15 +73,6 @@ function user_detail_get(req, res) {
         })
 }
 
-
-
-
-
-
-
-
-
-
 //HTTP GET - All profile:
 function user_profile_get(req, res) {
     User.find()
@@ -90,10 +83,17 @@ function user_profile_get(req, res) {
             console.log(err);
         })
 }
-
-
-
-
+//HTTP GET - All profile:
+function user_updatePassword_post(req, res) {
+    const data = req.body
+    data.id = req.user.id
+    console.log(data)
+    User.changePassword(data)
+        .then(res.redirect('/auth/signout'))
+        .catch(err => {
+            console.log(err.message);
+        })
+}
 
 module.exports = {
     user_edit_post,
@@ -103,5 +103,6 @@ module.exports = {
     user_detail_get,
     user_profile_get,
     user_profile_get,
-    user_editImg_post
+    user_editImg_post,
+    user_updatePassword_post
 }

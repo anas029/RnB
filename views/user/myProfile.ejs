@@ -5,14 +5,12 @@
 
 </div>
 <div>
-  first Name: <%= user.firstName %>
+  Name: <%= `${user.firstName} ${user.lastName}` %>
 
 </div>
+
 <div>
-  Last Name: <%= user.lastName %>
-</div>
-<div>
-  Name:<%= user.username %>
+  Username:<%= user.username %>
 </div>
 
 
@@ -23,9 +21,11 @@
 
   telephone Number :<%= user.telNumber %>
 </div>
+<div>credit amount :<%= user.credit %>
+</div>
 <div>
 
-  points:
+  Rating:
   <% let point=0%>
     <% let total=0%>
 
@@ -35,7 +35,13 @@
             <%total++ %>
               <% } %>
                 <% } %>
-                  <%=`${Math.round(( point/total)*10)/10}, number of reviews: ${total}` %>
+                  <% if (total) { %>
+                    <%=`${Math.round(( point/total)*10)/10}, number of reviews: ${total}` %>
+                      <% } else { %>
+                        no reviews yet
+                        <% } %>
+
+
 
 
 
@@ -50,25 +56,45 @@
 <a href="/item/add">
   <div>List a new Item</div>
 </a>
-<br>
-<hr>
+<a href="/payment">
+  <div>Add credit</div>
+</a>
+
 <div>
-  <% for( let key in user.item ) { %>
-    <a href="/item/details?id=<%= user.item[key]._id %>">
-      <p>
-        <%= user.item[key].itemName %>
-      </p>
-    </a>
-    <% } %>
+  <h5>My Listed Items</h5>
+  <% if (Object.keys(user.item).length) { %>
+    <% for( let key in user.item ) { %>
+      <div>
+        <div>
+          <p>
+            <img src="/images/items/<%= user.item[key].itemImage %>" alt="item picture" width="200" height="200">
+          </p>
+          <p>
+            item title: <%= user.item[key].itemName %>
+          </p>
+        </div>
+        <a href="/item/details?id=<%= user.item[key]._id %>"><input type="button" value="view"></a>
+        <a href="/item/edit?id=<%= user.item[key]._id %>"><input type="button" value="edit"></a>
+        <a href="/item/delete?id=<%= user.item[key]._id %>"><input type="button" value="delete"></a>
+      </div>
+      <hr>
+      <% } %>
+        <% } else { %>
+          <p>no item listed yet</p>
+          <% } %>
 </div>
-<br>
-<hr>
+
 <div>
-  <% for( let key in user.borrowedItem ) { %>
-    <a href="/item/details?id=<%= user.borrowedItem[key]._id %>">
-      <p>
-        <%= user.borrowedItem[key].itemName %>
-      </p>
-    </a>
-    <% } %>
+  <h5>Borrowed Items</h5>
+  <% if (Object.keys(user.borrowedItem).length) { %>
+    <% for( let key in user.borrowedItem ) { %>
+      <a href="/item/details?id=<%= user.borrowedItem[key]._id %>">
+        <p>
+          <%= user.borrowedItem[key].itemName %>
+        </p>
+      </a>
+      <% } %>
+        <% } else { %>
+          <p>no borrowed item</p>
+          <% } %>
 </div>

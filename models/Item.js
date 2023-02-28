@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const itemSchema = mongoose.Schema({
     itemName: { type: String, required: true },
     description: { type: String, required: true },
+    itemImage: { type: String, default: "default.jpg" },
     priceRate: { type: Number, required: true },
     deposit: { type: Number, required: true },
     condition: { type: String, enum: ['new', 'good', 'old'], required: true },
@@ -32,6 +33,10 @@ itemSchema.virtual('numOfReview', {
     foreignField: 'item',
     count: true
 })
+<<<<<<< HEAD
+=======
+
+>>>>>>> b5b2e9ca5238599323f3664c6d648f9fa7dd84b9
 itemSchema.set('toObject', { virtuals: true })
 
 module.exports = mongoose.model('Item', itemSchema)

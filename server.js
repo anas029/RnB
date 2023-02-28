@@ -54,7 +54,7 @@ app.use('/', indexRouter)
 app.use('/auth', authRouter)
 app.use('/review', reviewRouter)
 app.use('/user', userRouter)
-app.use('/item', itemRouter)
+app.use('/item/', itemRouter)
 app.use('/payment', paymentRouter)
 
 

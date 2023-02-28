@@ -1,5 +1,6 @@
 <h1>Add item</h1>
 
+<<<<<<< HEAD
 <form method="POST" action="/item/add">
     <input type="file" name="itemImage" id="">
     <!-- <button type="submit">submit item</button> -->
@@ -17,18 +18,45 @@
 
     <label>Item condition</label>
     <select name="condition" id="condition">
+=======
+<form method="POST" action="/item/add" enctype="multipart/form-data">
+    <label>Item Name</label>
+    <input name="itemName" type="text" required />
+
+    <label>Item description</label>
+    <textarea name="description" required></textarea>
+
+    <label>Item price</label>
+    <input name="priceRate" type="number" value="0" min="0" required />
+
+    <label>Dopsite amount</label>
+    <input name="deposit" type="number" value="0" min="0" required />
+
+    <label>Item condition</label>
+    <select name="condition" id="condition" required>
+>>>>>>> b5b2e9ca5238599323f3664c6d648f9fa7dd84b9
         <option value="new">new</option>
         <option value="good">good</option>
         <option value="old">old</option>
     </select>
 
     <label>Item Type</label>
+<<<<<<< HEAD
     <select name="type" id="type">
+=======
+    <select name="type" id="type" required>
+>>>>>>> b5b2e9ca5238599323f3664c6d648f9fa7dd84b9
         <option value="home appliances">home appliances</option>
         <option value="electronics">electronics</option>
         <option value="other">other</option>
     </select>
+<<<<<<< HEAD
 
     <button type="submit">Add item</button>
+=======
+    <input type="file" name="itemImage" id="" required>
+    <input type="submit" value="submit">
+    <!-- <button type="submit">Next</button> -->
+>>>>>>> b5b2e9ca5238599323f3664c6d648f9fa7dd84b9
 
 </form>
