@@ -74,8 +74,8 @@
           </p>
         </div>
         <a href="/item/details?id=<%= user.item[key]._id %>"><input type="button" value="view"></a>
-        <a href="/item/details?id=<%= user.item[key]._id %>"><input type="button" value="edit"></a>
-        <a href="/item/details?id=<%= user.item[key]._id %>"><input type="button" value="delete"></a>
+        <a href="/item/edit?id=<%= user.item[key]._id %>"><input type="button" value="edit"></a>
+        <a href="/item/delete?id=<%= user.item[key]._id %>"><input type="button" value="delete"></a>
       </div>
       <hr>
       <% } %>
