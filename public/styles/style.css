@@ -12,6 +12,11 @@
     color: #0d6efd;
 }
 
+.up-logo {
+    /* display: flex; */
+    flex-direction: column;
+}
+
 .bd-placeholder-img {
     font-size: 1.125rem;
     text-anchor: middle;
