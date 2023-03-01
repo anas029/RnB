@@ -1,10 +1,3 @@
-<style>
-  #userItem{
-    background-color: antiquewhite;
-  }
-</style>
-
-
   <div class="container py-5">
     
     <div class="row">
@@ -16,7 +9,7 @@
             <h5 class="my-3"><%= `${user.firstName} ${user.lastName}` %></h5>
             <h4 class="my-3"><%= user.username %></h4>
             
-            <div class="d-flex justify-content-center mb-2">
+            <div class="btn-group mb-4">
               <a href="/user/edit" type="button"  class="btn btn-outline-primary ms-1">Edit profile</a>
               <a href="/item/add" type="button" class="btn btn-outline-primary ms-1">list a new item</a>
               <a href="/payment" type="button" class="btn btn-outline-primary ms-1">Add credit</a>
@@ -25,7 +18,7 @@
         </div>
         
       </div>
-      <div class="col-lg-8">
+      <div class="col-lg-8 align-items-center">
         <div class="card mb-4">
           <div class="card-body">
             <div class="row">
@@ -59,17 +52,8 @@
               </div>
             </div>
             <hr>        
-            <div class="row">
-               <div class="col-sm-3">
-                <p class="mb-0">Credit</p>
-                </div>
-                <div class="col-sm-3">
-                <p class="text-muted mb-0"><%= user.credit %></p>
-                          
-                </div>
-          </div>
-          <hr>
-          
+           
+                    
             <div class="col-sm-9">
   
 </div>
@@ -106,10 +90,10 @@
  </div>
 
 
-  <div class="album py-6 bg-light ">
-    <div class="container">
+  <div class="album py-6 background-color-black bgd" >
+    <div class="container itemC">
       <h2>My Items</h2>
-        <div class="row row-cols-4 row-cols-sm-4 row-cols-md-4 g-4 bg-light" id="userItem">
+        <div class="row row-cols-4 row-cols-sm-4 row-cols-md-4 g-4 justify-content-center bgd">
             <% if (Object.keys(user.item).length) { %>
             <% for( let key in user.item ) { %>
                 <div class="col">
@@ -124,11 +108,11 @@
                             <p class="card-text">
                                 <%= user.item[key].description %>
                             </p>
-                            <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group mb-4">
                                 
-                                  <a href="/item/details?id=<%= user.item[key]._id %>" class="btn btn-outline-primary">View</a>
-                                  <a href="/item/edit?id=<%= user.item[key]._id %>" class="btn btn-outline-primary">Edit</a>
-                                 <a href="/item/delete?id=<%= user.item[key]._id %>" class="btn btn-outline-primary">delete</a>
+                                  <a href="/item/details?id=<%= user.item[key]._id %>" class="btn btn-outline-primary ms-1">View</a>
+                                  <a href="/item/edit?id=<%= user.item[key]._id %>" class="btn btn-outline-primary ms-1">Edit</a>
+                                 <a href="/item/delete?id=<%= user.item[key]._id %>" class="btn btn-outline-primary ms-1">delete</a>
                                
                                 
                             </div>
@@ -141,13 +125,13 @@
                <% } %>
         </div>
     </div>
+  </div>
 
 
-
-<div class="album py-6 bg-light">
-  <div class="container">
-    <h2>My Items</h2>
-      <div class="row row-cols-4 row-cols-sm-4 row-cols-md-4 g-4">
+<div class="album py-6 background-color-black " >
+  <div class="container itemC">
+    <h2>Rented Items</h2>
+      <div class="row row-cols-4 row-cols-sm-4 row-cols-md-4 g-4 justify-content-center" >
         <% if (Object.keys(user.borrowedItem).length) { %>
           <% for( let key in user.borrowedItem ) { %>
               <div class="col">
@@ -162,12 +146,12 @@
                           <p class="card-text">
                               <%= user.borrowedItem[key].description %>
                           </p>
-                          <div class="d-flex justify-content-between align-items-center">
-                              <div class="btn-group">
-                                <a href="/item/details?id=<%= user.item[key]._id %>" class="btn btn-outline-primary">View</a>
-                                <a href="/item/edit?id=<%= user.item[key]._id %>" class="btn btn-outline-primary">Edit</a>
-                               <a href="/item/delete?id=<%= user.item[key]._id %>" class="btn btn-outline-primary">delete</a>
-                              </div>
+                          <div class="btn-group mb-4">
+                              
+                                <a href="/item/details?id=<%= user.item[key]._id %>" class="btn btn-outline-primary ms-1">View</a>
+                                <a href="/item/edit?id=<%= user.item[key]._id %>" class="btn btn-outline-primary ms-1">Edit</a>
+                               <a href="/item/delete?id=<%= user.item[key]._id %>" class="btn btn-outline-primary ms-1">delete</a>
+                              
                               
                           </div>
                       </div>
@@ -179,3 +163,4 @@
              <% } %>
       </div>
   </div>
+</div>
