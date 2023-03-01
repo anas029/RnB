@@ -38,10 +38,10 @@
 
 }
 
-.bgd {
+/* .bgd {
     background-color: #EEEEEE;
 
-}
+} */
 
 .reg>a {
     padding-top: 10px;
@@ -69,6 +69,27 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type=number] {
     -moz-appearance: textfield;
+}
+
+select.addItem {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--bs-body-color);
+    background-color: var(--bs-form-control-bg);
+    background-clip: padding-box;
+    border: var(--bs-border-width) solid var(--bs-border-color);
+
+    border-radius: 0.375rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.up2 {
+
+    width: 100%;
 }
 
 @media (min-width: 768px) {
