@@ -4,29 +4,25 @@
 
 </div>
 <div>
-  User first Name: <%= user.firstName %>
-
+  Username: <%= user.username %>
 </div>
 <div>
-  User Last Name: <%= user.lastName %>
-</div>
-<div>
-  user Name:<%= user.username %>
-</div>
-<div>
-  User email Address: <%= user.emailAddress %>
+  Email Address: <a href="mailto:<%= user.emailAddress %>">
+    <%= user.emailAddress %>
+  </a>
 </div>
 <div>
 
-  User telephone Number :<%= user.telNumber %>
+  Mobile Number: <a href="tel:+<%= user.telNumber %>">
+    <%= user.telNumber %>
+  </a>
 </div>
 <div>
-
-  User credit amount :<%= user.credit %>
+  <% const options={ year: 'numeric' , month: 'long' } %>
+    User since: <%= user.createdAt.toLocaleDateString('en-US', options) %>
 </div>
 <div>
-
-  points:
+  Rating:
   <% let point=0%>
     <% let total=0%>
 
@@ -39,23 +35,17 @@
                   <% } %>
                     <% } %>
                       <% if (total) { %>
-                        <%=`${Math.round(( point/total)*10)/10}, number of reviews: ${total}` %>
+                        <%=`${Math.round(( point/total)*10)*(10/5)}%, number of reviews: ${total}` %>
                           <% } else { %>
-                            no reviews
+                            no review
                             <% } %>
 </div>
 <hr>
 <div>
   <% for( let key in user.item ) { %>
     <a href="/item/details?id=<%= user.item[key]._id %>">
+      <img src="/images/items/<%= user.item[key].itemImage %>" alt="item picture" width="200" height="200">
       <%= user.item[key].itemName %>
-    </a>
-    <% } %>
-</div>
-<div>
-  <% for( let key in user.borrowedItem ) { %>
-    <a href="/item/details?id=<%= user.borrowedItem[key]._id %>">
-      <%= user.borrowedItem[key].itemName %>
     </a>
     <% } %>
 </div>

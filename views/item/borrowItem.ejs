@@ -3,6 +3,13 @@
 <p>User <%= user.username %>
 </p>
 
-<form action="/item/borrow?id=<%= item._id %>" method="post">
-    <button type="submit">borrow</button>
-</form>
+<% if (user.credit<item.deposit) { %>
+
+    <form action="/item/borrow?id=<%= item._id %>" method="post">
+        <button type="submit" disabled>borrow </button>
+        You have insufficient balance, <a href="/payment">please make payment first</a>
+        <% } else { %>
+            <form action="/item/borrow?id=<%= item._id %>" method="post">
+                <button type="submit">Rent it </button>
+                <% } %>
+            </form>

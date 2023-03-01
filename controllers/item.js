@@ -40,6 +40,7 @@ function item_index_get(req, res) {
 function item_details_get(req, res) {
     Item.findById(req.query.id).populate('owner').populate('borrower').populate('review').populate('numOfReview')
         .then(item => {
+            console.log(item)
             res.render("item/details", { item, user: req.user })
         })
         .catch(err => console.log(err))
@@ -170,39 +171,6 @@ function item_edit_get(req, res) {
 }
 // HTTP POST - Edit
 function item_edit_post(req, res) {
-    // const filter = { id: req.query.id, isAvailable: true, owner: req.user._id }
-    // let data = req.body
-    // const update = { data }
-    // Item.findOneAndUpdate(filter, update, (err) => {
-    //     if (err)
-    //         console.log(err.message)
-    //     else
-    //         res.redirect('/')
-    // })
-
-
-
-
-
-
-
-    // const filter = { id: req.query.id };
-    // let data = req.body;
-    // const update = { data };
-    // Item.findOneAndUpdate(filter, update, { new: true }, (err, updatedItem) => {
-    //     if (err) {
-    //         console.log(err);
-    //         res.sendStatus(500);
-    //     } else if (!updatedItem) {
-    //         console.log(`No item found for id ${req.query.id}`);
-    //         res.sendStatus(404);
-    //     } else {
-    //         console.log(`Updated item: ${updatedItem}`);
-    //         res.sendStatus(200);
-    //     }
-    // });
-
-
     const data = { itemName, description, priceRate, deposit, condition, type } = req.body
     Item.findByIdAndUpdate(req.query.id, data)
         .then((b) => {
@@ -210,15 +178,7 @@ function item_edit_post(req, res) {
         })
         .catch((err) => {
             console.log(err);
-            res.send("Please try again later!!!");
         })
-
-
-
-
-
-
-
 }
 ///-
 function item_edit2_get(req, res) {
@@ -230,41 +190,6 @@ function item_edit2_get(req, res) {
         })
         .catch(err => console.log(err))
 }
-function item_edit2_post(req, res) {
-    console.log(req.body)
-    const filter = { _id: req.query.id, isAvailable: true, owner: req.user._id }
-    let data = req.body
-    data.itemImage = req.file.filename
-    const update = { data }
-    Item.findOneAndUpdate(filter, update, { new: true })
-    // Item.findById(req.query.id)
-    //     .then(item => {
-    //         if (!item.isAvailable) {
-    //             const balance = item.dopiste - (
-    //                 item.priceRate * Math.ceil((Date.now() - item.borrowDate) / (1000 * 60 * 60 * 24)))
-    //             User.findById(item.borrower)
-    //                 .then(user => {
-    //                     user.credit += balance
-    //                     user.save()
-    //                 })
-    //                 .catch(e => console.log(e.message))
-    //             item.isAvailable = true
-    //             item.borrower = null
-    //             item.borrowDate = null
-    //             item.save()
-    //             const data = req.body
-    //             data.score = parseInt(req.body.score)
-    //             data.creatorId = req.user._id
-    //             data.item = item._id
-    //             const review = new Review(data)
-    //             review.save()
-    //                 .then(res.redirect("/"))
-    //                 .catch(err => console.log(err))
-    //         }
-    //     })
-    //     .catch(err => console.log(err))
-}
-//\\-
 //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\//
 // DELETE
 // HTTP GET - Delete
@@ -292,6 +217,5 @@ module.exports = {
     item_edit_get,
     item_edit_post,
     item_delete_get,
-    item_edit2_post,
     item_edit2_get
 }
