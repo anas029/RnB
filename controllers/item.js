@@ -6,7 +6,28 @@ const Review = require("../models/Review")
 
 //HTTP GET - index:
 function item_index_get(req, res) {
-    Item.find().populate('owner').populate('borrower').populate('review').populate('numOfReview')
+    let data = req.query.sort == "priceUp" ? { priceRate: 1 } : req.query.sort == "priceDown" ? { priceRate: -1 } : req.query.sort == "newest" ? { createdAt: -1 } : req.query.sort == "oldest" ? { createdAt: 1 } : {}
+    const filter = {}
+    if (req.query.category === 'home_appliances')
+        filter.type = 'home appliances'
+    if (req.query.category === 'electronics')
+        filter.type = 'electronics'
+    if (req.query.category === 'other')
+        filter.type = 'other'
+
+    if (req.query.condition === 'new')
+        filter.condition = 'new'
+    if (req.query.condition === 'good')
+        filter.condition = 'good'
+    if (req.query.condition === 'old')
+        filter.condition = 'old'
+
+    if (req.query.availability === 'available')
+        filter.isAvailable = true
+    if (req.query.availability === 'notAvailable')
+        filter.isAvailable = false
+
+    Item.find(filter).sort(data).populate('owner').populate('borrower').populate('review').populate('numOfReview')
         .then(items => {
             res.render("item/index", { items })
         })
