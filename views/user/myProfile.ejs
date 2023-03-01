@@ -1,8 +1,3 @@
-<style>
-  body{
-    /* background-color: #eee; */
-  }
-</style>
 <section style="background-color: #eee;">
   <div class="container py-5">
     
@@ -102,8 +97,8 @@
             <h5 class="card-title"><%= user.item[key].itemName %></h5>
   
              <a href="/item/details?id=<%= user.item[key]._id %>" class="btn btn-primary">View</a>
-             <a href="/item/details?id=<%= user.item[key]._id %>" class="btn btn-primary">Edit</a>
-            <a href="/item/details?id=<%= user.item[key]._id %>" class="btn btn-primary">delete</a>
+             <a href="/item/edit?id=<%= user.item[key]._id %>" class="btn btn-primary">Edit</a>
+            <a href="/item//delete?id=<%= user.item[key]._id %>" class="btn btn-primary">delete</a>
              <hr>
             </div>  
                    </div>

@@ -1,5 +1,44 @@
-<h1>Add item</h1>
-<form action="/item/addimg?id=<%= item._id %>" method="post" enctype="multipart/form-data">
-    <input type="file" name="itemImage" id="" required>
-    <button type="submit">submit item</button>
-</form>
+<style>
+    .pic{
+        position: relative;
+        align-items: center;
+        top: 50%;
+        right: -40%;
+        border-radius: 50%;
+    }
+    .edit{ 
+    position: relative;
+    align-items: center;
+    /* top: 0%; */
+    top: 50%;
+    right: -42%;
+    }
+    #updatebtn{
+        position: relative;
+        align-items: center;
+        display: flex;
+        padding: 5px;
+        margin: 5px;
+        right: -42%;
+        /* top: -40%; */
+    }
+
+    
+    </style>
+
+<!-- edit profile pix layout -->
+
+ <div class="container py-4" >
+
+    <h2 class="edit">Add item</h2>
+    <form action="/item/addimg?id=<%= item._id %>" method="post" enctype="multipart/form-data">
+        <img src="/images/items/<%= item.itemImage %>" alt="item picture" width="200" height="200" class="pic">
+     <div class="col-md-3">
+        <input type="file" name="itemImage" id="" required>
+     </div> 
+     <hr>
+     <div class="col-md-3">
+        <button type="submit">submit item</button>
+     </div >
+    
+    </form>

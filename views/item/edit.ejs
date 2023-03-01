@@ -1,39 +1,100 @@
-<h1>Edit item</h1>
-<form method="POST" action="/item/edit/details?id=<%= item._id %>">
-    <label>Item Name</label>
-    <input name="itemName" type="text" value="<%= item.itemName %>" required />
+<style>
+    .pic{
+        position: relative;
+        align-items: center;
+        top: 50%;
+        right: -40%;
+        border-radius: 50%;
+    }
+    .edit{ 
+    position: relative;
+    align-items: center;
+    /* top: 0%; */
+    top: 50%;
+    right: -42%;
+    }
+    #updatebtn{
+        position: relative;
+        align-items: center;
+        display: flex;
+        padding: 5px;
+        margin: 5px;
+        right: -42%;
+        /* top: -40%; */
+    }
 
-    <label>Item description</label>
-    <textarea name="description" value="<%= item.description %>" required><%= item.description %></textarea>
+    
+    </style>
 
-    <label>Price pre day</label>
-    <input name="priceRate" type="number" value="<%= item.priceRate %>" min="0" required />
+<!-- edit profile pix layout -->
 
-    <label>Dopsite amount</label>
-    <input name="deposit" type="number" value="<%= item.deposit %>" min="0" required />
+ <div class="container py-4" >
 
-    <label>Item condition</label>
-    <select name="condition" id="condition" required>
-        <option value="new">new</option>
-        <option value="good">good</option>
-        <option value="old">old</option>
-    </select>
+    <h2 class="edit">Edit item</h2>
+    <form action="/item/addimg?id=<%= item._id %>" method="post" enctype="multipart/form-data">
+        <img src="/images/items/<%= item.itemImage %>" alt="item picture" width="200" height="200" class="pic">
+     <div class="col-md-3">
+        <input type="file" name="itemImage" id="" required>
+     </div> 
+     <hr>
+     <div class="col-md-3">
+        <button type="submit">submit item</button>
+     </div >
+    
+    </form>
+<!-- edit form layout -->
 
-    <label>Item Type</label>
-    <select name="type" id="type" required>
-        <option value="home appliances">home appliances</option>
-        <option value="electronics">electronics</option>
-        <option value="other">other</option>
-    </select>
+    <div class="row g-3 m-6" >
 
-    <button type="submit">Update</button>
+        <form action="/item/edit/details?id=<%= item._id %>" >
+            <div class="col-md-3">
+                <label>Item Name</label>
+              <input name="itemName" type="text" class="form-control" value="<%= item.itemName %>" required>
+            </div>
+            <div class="col-md-3">
+                <label>Item description</label>
+              <textarea name="description" class="form-control" value="<%= item.description %>" required><%= item.description %></textarea>
+              </div>
+            <div class="col-md-3">
+                <label>Price pre day</label>
+              <input name="priceRate" type="text" class="form-control" value="<%= item.priceRate %>" min="0" required>
+              </div>
+              <div class="col-md-3">
+                <label>Dopsite amount</label>
+              <input name="deposit" type="text" class="form-control" value="<%= item.deposit %>" min="0" required >
+            </div>
+            <div class="col-md-3 dropdown-center" >
+                <label>Item condition</label>
+                <select name="condition" id="condition" required>
+                <option value="new">new</option>
+                <option value="good">good</option>
+                <option value="old">old</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label>Item Type</label>
+                <select name="type" id="type" required>
+                <option value="home appliances">home appliances</option>
+                <option value="electronics">electronics</option>
+               <option value="other">other</option>
+               </select>
+            </div>
+             <hr>
+              <div class="col-md-3">
+                <button type="submit">Submit</button>
+              </div>
+    
+            </form>
+                        
+     </div>
+  
 
-</form>
-<br>
-<br>
-<br>
-<form action="/item/addimg?id=<%= item._id %>" method="post" enctype="multipart/form-data">
-    <img src="/images/items/<%= item.itemImage %>" alt="item picture" width="200" height="200">
-    <input type="file" name="itemImage" id="" required>
-    <button type="submit">submit item</button>
-</form>
+     
+     
+ </div>
+  
+
+
+
+
+

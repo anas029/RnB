@@ -1,41 +1,94 @@
-<h2>
-    <%= item.title %>
-</h2>
-<div>
-    <img src="/images/items/<%= item.itemImage %>" alt="item picture" width="200" height="200">
-
-    <%= item.itemName %>
-        Description: <%= item.description %>
-            Price per day: <%= item.priceRate %>
-                condition: <%= item.condition %>
-                    owner: <%= item.owner.username %>
-</div>
-<div>
-    <% if (item.numOfReview) { %>
-        <% let point=0%>
-            <% for (const key in item.review) { %>
-                <%point+= item.review[key].score %>
-                    <% } %>
-                        <%= `rating: ${Math.round((point/ item.review.length)*(100/5)*100)/100}%` %>
-                            <% } else { %>
-                                no review yet
+<section style="background-color: #eee;">
+    <div class="container py-5">
+      
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="card mb-4">
+            <div class="card-body text-center">
+              <img src="/images/items/<%= item.itemImage %>" alt="profile picture" width="200" height="200" alt="profile image"
+                class="rounded-circle img-fluid" style="width: 150px;">
+              <h5 class="my-3"><%= item.title %></h5>
+                        
+              <div class="d-flex justify-content-center mb-2">
+                <% if (user&&item.owner.id.toString()===user._id.toString()) { %>
+                    <% if (!item.isAvailable) { %>
+                        borrower: <%= item.borrower.username %>
+                            borrowed date <%= item.borrowDate %>
                                 <% } %>
-</div>
-<div>
-    <% if (user&&item.owner.id.toString()===user._id.toString()) { %>
-        <% if (!item.isAvailable) { %>
-            borrower: <%= item.borrower.username %>
-                borrowed date <%= item.borrowDate %>
+                                    <% } else { %>
+                                        <% if (item.isAvailable) { %>
+                                            <a href="/item/borrow?id=<%= item._id %>" type="button"  class="btn btn-outline-primary ms-1">Borrow</a>
+                                           
+                                            <% } %>
+                                                <% } %> 
+              </div>
+              <div>
+                <% if ((!item.isAvailable)&&item.borrower.id.toString()===user._id.toString()) { %>
+                    <a href="/item/return?id=<%= item._id %>">return</a>
                     <% } %>
-                        <% } else { %>
-                            <% if (item.isAvailable) { %>
-                                <a href="/item/borrow?id=<%= item._id %>">borrow</a>
+            </div>
+            </div>
+          </div>
+          
+        </div>
+        <div class="col-lg-8">
+          <div class="card mb-4">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Item Name</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0"><%= item.itemName %></p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Item Description</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0"><%= item.description %></p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Item Conditon</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0"><%= item.condition %></p>
+                </div>
+              </div>
+              <hr>        
+              <div class="row">
+                 <div class="col-sm-3">
+                  <p class="mb-0">Item Owner</p>
+                  </div>
+                  <div class="col-sm-3">
+                  <p class="text-muted mb-0"><%= item.owner.username %></p>
+                            
+                  </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                
+                <p class="mb-0">Reviews</p>
+              </div>
+              <div class="col-sm-9">
+                
+                <% if (item.numOfReview) { %>
+                    <% let point=0%>
+                        <% for (const key in item.review) { %>
+                            <%point+= item.review[key].score %>
                                 <% } %>
-                                    <% } %>
-</div>
-
-<div>
-    <% if ((!item.isAvailable)&&item.borrower.id.toString()===user._id.toString()) { %>
-        <a href="/item/return?id=<%= item._id %>">return</a>
-        <% } %>
-</div>
+                                    <%= `rating: ${Math.round((point/ item.review.length)*(100/5)*100)/100}%` %>
+                                        <% } else { %>
+                                            no review yet
+                                            <% } %>
+                
+            </div>
+        </div>
+        </div>
+      </div>
