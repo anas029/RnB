@@ -6,6 +6,12 @@
     text-transform: capitalize
 }
 
+.signin {
+    background-color: white;
+    margin-right: 5px;
+    color: #0d6efd;
+}
+
 .bd-placeholder-img {
     font-size: 1.125rem;
     text-anchor: middle;

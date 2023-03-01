@@ -51,8 +51,6 @@ userSchema.statics.isValid = async function ({ firstName, lastName, username, em
 userSchema.statics.changePassword = async function ({ id, password, newPassword1, newPassword2 }) {
   if (!password || !newPassword1 || !newPassword2)
     throw Error('All fields must be filled')
-  console.log(newPassword1);
-  console.log(newPassword2);
   if (newPassword1 !== newPassword2)
     throw Error('New password mismatch')
   if (!validator.isStrongPassword(newPassword1))
