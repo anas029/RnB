@@ -1,82 +1,71 @@
-<style>
-    .pic{
-        position: relative;
-        align-items: center;
-        top: 50%;
-        right: -40%;
-        border-radius: 50%;
-    }
-    .edit{ 
-    position: relative;
-    align-items: center;
-    /* top: 0%; */
-    top: 50%;
-    right: -42%;
-    }
-    #updatebtn{
-        position: relative;
-        align-items: center;
-        display: flex;
-        padding: 5px;
-        margin: 5px;
-        right: -42%;
-        /* top: -40%; */
-    }
+      <!-- add item pix layout -->
 
-    
-    </style>
+ <div class="container py-5" >
 
-<!-- edit profile pix layout -->
-
- <div class="container py-4" >
+  <h2 class="edit">Add Item</h2>
+     <form action="/item/add"  method="post" enctype="multipart/form-data">    
+     
    
-
+   <div class="row align-items-center justify-content-around row g-3">
+             
+       <div class="col-9">
+          
+          <input class="form-control" type="file" name="itemImage">
+          
+        </div>
+        <div class="col-3">
+          
+          <button type="submit" class="btn btn-outline-primary ms-1" required >Add Image</button>
+        </div>
+        
+   </div>
+   
+  </form>
 <!-- edit form layout -->
 
-    <div class="row g-3 m-6" >
+  <div class="row g-3">
 
-        <form method="POST" action="/item/add" enctype="multipart/form-data" >
-            <div class="col-md-3">
-                <label>Item Name</label>
-              <input name="itemName" type="text" class="form-control" required >
+      <form class="row g-3 justify-content-around" method="POST" action="/user/edit" >
+          <div class="col-md-6">
+              <label>Item Name</label>
+            <input name="itemName" type="text" class="form-control" required>
+          </div>
+          <div class="col-md-6">
+              <label>Item description</label>
+            <textarea name="lastName" type="text" class="form-control" required>
+
+            </textarea>
             </div>
-            <div class="col-md-3">
-                <label>Item description</label>
-              <textarea name="description" class="form-control" required></textarea>
-              </div>
-            <div class="col-md-3">
-                <label>Price pre day</label>
-              <input name="priceRate" type="text" class="form-control" required>
-              </div>
-              <div class="col-md-3">
-                <label>Dopsite amount</label>
-              <input name="deposit" type="text" class="form-control" required >
+            <div class="col-md-6">
+              <label>Price pre day</label>
+            <input name="priceRate" type="text" class="form-control" required>
             </div>
-            <div class="col-md-3 dropdown-center" >
-                <label>Item condition</label>
-                <select name="condition" id="condition" required>
-                <option value="new">new</option>
-                <option value="good">good</option>
-                <option value="old">old</option>
-                </select>
+            <div class="col-md-6">
+              <label>Dopsite amount</label>
+            <input name="deposit" type="text" class="form-control" required>
             </div>
-            <div class="col-md-3">
-                <label>Item Type</label>
-                <select name="type" id="type" required>
-                <option value="home appliances">home appliances</option>
-                <option value="electronics">electronics</option>
-               <option value="other">other</option>
-               </select>
+            <div class="col-md-6 dropdown-center" >
+              <label>Item condition</label>
+              <select name="condition" id="condition" required>
+              <option value="new">new</option>
+              <option value="good">good</option>
+              <option value="old">old</option>
+              </select>
+          </div>
+          <div class="col-md-6">
+            <label>Item Type</label>
+            <select name="type" id="type" required>
+            <option value="home appliances">home appliances</option>
+            <option value="electronics">electronics</option>
+           <option value="other">other</option>
+           </select>
+        </div>
+
+          <div class="col-md-6 d-flex align-items-end">
+
+              <input type="submit" class="btn btn-outline-primary ms-1" value="Update info">
             </div>
-            <div class="col-md-3" >
-                <input type="file" name="itemImage" id="" required>
-            </div>
-             <hr>
-              <div class="col-md-3">
-                <input type="submit" value="submit">
-              </div>
-              
-    
-            </form>
-                        
-     </div>
+  
+          </form>
+                      
+   </div>
