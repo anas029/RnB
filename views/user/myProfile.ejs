@@ -1,4 +1,4 @@
-<h1> Users detail </h1>
+<h1>My profile</h1>
 
 <div>
   <img src="/images/profile/<%= user.profileImage %>" alt="profile picture" width="200" height="200">
@@ -15,16 +15,19 @@
 
 
 <div>
-  email Address: <%= user.emailAddress %>
+  email Address: <a href="mailto:<%= user.emailAddress %>">
+    <%= user.emailAddress %>
+  </a>
 </div>
 <div>
 
-  telephone Number :<%= user.telNumber %>
+  Mobile Number: <a href="tel:+<%= user.telNumber %>">
+    <%= user.telNumber %>
+  </a>
 </div>
-<div>credit amount :<%= user.credit %>
+<div>credit amount: BD<%= user.credit %>
 </div>
 <div>
-
   Rating:
   <% let point=0%>
     <% let total=0%>
@@ -36,7 +39,7 @@
               <% } %>
                 <% } %>
                   <% if (total) { %>
-                    <%=`${Math.round(( point/total)*10)/10}, number of reviews: ${total}` %>
+                    <%=`${Math.round(( point/total)*10)*(10/5)}, number of reviews: ${total}` %>
                       <% } else { %>
                         no reviews yet
                         <% } %>

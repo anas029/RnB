@@ -1,7 +1,7 @@
 const User = require('../models/User');
 
 function payment_index_get(req, res) {
-    res.render("payment/index")
+    res.render("payment/index", { user: req.user })
 }
 
 function payment_index_post(req, res) {

@@ -8,7 +8,9 @@
         Description: <%= item.description %>
             Price per day: <%= item.priceRate %>
                 condition: <%= item.condition %>
-                    owner: <%= item.owner.username %>
+                    owner: <a href="/user/detail?id=<%= item.owner._id %>">
+                        <%= item.owner.username %>
+                    </a>
 </div>
 <div>
     <% if (item.numOfReview) { %>
@@ -16,7 +18,8 @@
             <% for (const key in item.review) { %>
                 <%point+= item.review[key].score %>
                     <% } %>
-                        <%= `rating: ${Math.round((point/ item.review.length)*(100/5)*100)/100}%` %>
+                        <%= `rating: ${Math.round((point/ item.review.length)*(100/5)*10)/10}%, number of reviews:
+                            ${item.review.length}` %>
                             <% } else { %>
                                 no review yet
                                 <% } %>
@@ -29,7 +32,7 @@
                     <% } %>
                         <% } else { %>
                             <% if (item.isAvailable) { %>
-                                <a href="/item/borrow?id=<%= item._id %>">borrow</a>
+                                <a href="/item/borrow?id=<%= item._id %>">Rent it</a>
                                 <% } %>
                                     <% } %>
 </div>
