@@ -1,0 +1,47 @@
+.cover-img {
+    object-fit: cover;
+}
+
+.cap {
+    text-transform: capitalize
+}
+
+.signin {
+    background-color: white;
+    margin-right: 5px;
+    color: #0d6efd;
+}
+
+.up-logo {
+    /* display: flex; */
+    flex-direction: column;
+}
+
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+.itemsP{
+    margin: 40px auto;
+    
+  
+}
+.itemC{
+    padding: 40px;
+    margin: 0 auto;
+    text-align: center;
+
+}
+.bgd{
+    background-color: #EEEEEE ;
+
+}
+
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}

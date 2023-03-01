@@ -1,31 +1,82 @@
-<h1>Add item</h1>
+<style>
+    .pic{
+        position: relative;
+        align-items: center;
+        top: 50%;
+        right: -40%;
+        border-radius: 50%;
+    }
+    .edit{ 
+    position: relative;
+    align-items: center;
+    /* top: 0%; */
+    top: 50%;
+    right: -42%;
+    }
+    #updatebtn{
+        position: relative;
+        align-items: center;
+        display: flex;
+        padding: 5px;
+        margin: 5px;
+        right: -42%;
+        /* top: -40%; */
+    }
 
-<form method="POST" action="/item/add" enctype="multipart/form-data">
-    <label>Item Name</label>
-    <input name="itemName" type="text" required />
+    
+    </style>
 
-    <label>Description</label>
-    <textarea name="description" required></textarea>
+<!-- edit profile pix layout -->
 
-    <label>Price per day</label>
-    <input name="priceRate" type="number" value="0" min="0" required />
+ <div class="container py-4" >
+   
 
-    <label>Dopsite amount</label>
-    <input name="deposit" type="number" value="0" min="0" required />
+<!-- edit form layout -->
 
-    <label>Item condition</label>
-    <select name="condition" id="condition" required>
-        <option value="new">new</option>
-        <option value="good">good</option>
-        <option value="old">old</option>
-    </select>
+    <div class="row g-3 m-6" >
 
-    <label>Item Type</label>
-    <select name="type" id="type" required>
-        <option value="home appliances">home appliances</option>
-        <option value="electronics">electronics</option>
-        <option value="other">other</option>
-    </select>
-    <input type="file" name="itemImage" id="" required>
-    <input type="submit" value="submit">
-</form>
+        <form method="POST" action="/item/add" enctype="multipart/form-data" >
+            <div class="col-md-3">
+                <label>Item Name</label>
+              <input name="itemName" type="text" class="form-control" required >
+            </div>
+            <div class="col-md-3">
+                <label>Item description</label>
+              <textarea name="description" class="form-control" required></textarea>
+              </div>
+            <div class="col-md-3">
+                <label>Price pre day</label>
+              <input name="priceRate" type="text" class="form-control" required>
+              </div>
+              <div class="col-md-3">
+                <label>Dopsite amount</label>
+              <input name="deposit" type="text" class="form-control" required >
+            </div>
+            <div class="col-md-3 dropdown-center" >
+                <label>Item condition</label>
+                <select name="condition" id="condition" required>
+                <option value="new">new</option>
+                <option value="good">good</option>
+                <option value="old">old</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label>Item Type</label>
+                <select name="type" id="type" required>
+                <option value="home appliances">home appliances</option>
+                <option value="electronics">electronics</option>
+               <option value="other">other</option>
+               </select>
+            </div>
+            <div class="col-md-3" >
+                <input type="file" name="itemImage" id="" required>
+            </div>
+             <hr>
+              <div class="col-md-3">
+                <input type="submit" value="submit">
+              </div>
+              
+    
+            </form>
+                        
+     </div>

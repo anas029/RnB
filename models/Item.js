@@ -19,7 +19,7 @@ const itemSchema = mongoose.Schema({
     },
     borrowDate: { type: Date },
     isAvailable: { type: Boolean, default: true, required: true }
-}, { timetamps: true })
+}, { timestamps: true })
 
 
 itemSchema.virtual('review', {

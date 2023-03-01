@@ -1,40 +1,112 @@
-<h2>Edit user</h2>
+<style>
+    .pic{
+        position: relative;
+        align-items: center;
+        top: 50%;
+        right: -40%;
+        border-radius: 50%;
+    }
+    .edit{ 
+    position: relative;
+    align-items: center;
+    /* top: 0%; */
+    top: 50%;
+    right: -42%;
+    }
+    #updatebtn{
+        position: relative;
+        align-items: center;
+        display: flex;
+        padding: 5px;
+        margin: 5px;
+        right: -42%;
+        /* top: -40%; */
+    }
 
-<form action="/user/edit/img" method="post" enctype="multipart/form-data">
-    <img src="/images/profile/<%= user.profileImage %>" alt="profile picture" width="200" height="200">
+    
+    </style>
+
+<!-- edit profile pix layout -->
+
+ <div class="container py-5" >
+
+    <h2 class="edit">Edit Profile</h2>
+    <form action="/user/edit/img" method="post" enctype="multipart/form-data">
+     <img src="/images/profile/<%= user.profileImage %>" alt="profile picture" width="200" height="200" class="pic">
+     <div class="col-md-3">
+        <input type="file" name="profileImage" >
+     </div> 
+     <hr>
+     <div class="col-md-3">
+        <button type="submit" >Update image</button>
+     </div >
+    
+    </form>
+<!-- edit form layout -->
+
+    <div class="row g-3">
+
+        <form class="row g-3" method="POST" action="/user/edit" >
+            <div class="col-md-3">
+                <label>First Name</label>
+              <input name="firstName" type="text" class="form-control" value="<%= user.firstName %>">
+            </div>
+            <div class="col-md-3">
+                <label>Last Name</label>
+              <input name="lastName" type="text" class="form-control" value="<%= user.lastName %>">
+              </div>
+            <div class="col-md-3">
+                <label>Email Address</label>
+              <input name="emailAddred" type="email" class="form-control" value="<%= user.emailAddress %>" disabled >
+            </div>
+            <div class="col-md-3">
+                <label>Telephone Number</label>
+              <input name="telNumber" type="text" class="form-control" value="<%= user.telNumber %>">
+              </div>
+              <hr>
+              <div class="col-md-3">
+                <button type="submit">Update info</button>
+              </div>
+    
+            </form>
+                        
+     </div>
+     
+<!-- edit password change layout -->
+     <div class="row g-2" >
+        <form class="row g-3" action="/user/edit/password" method="post">
+            <div class="col-md-4">
+                <!-- <label for="oldPassword">Current password</label> -->
+                <input type="password" placeholder="Current Password"  name="password" id="" required> 
+            </div> 
+            <div class="col-md-4">
+                <!-- <label for="NewPassword">New password</label> -->
+            <input type="password" placeholder="New Password" name="newPassword1" id="" required>
+            
+            </div> 
+            <div class="col-md-4">
+            <input type="password" placeholder="Confirm Password" name="newPassword2" id="" required>
+            </div> 
+            <hr>
+            <div class="col-md-4">
+                <button type="submit">Change password</button>
+            </div> 
+            
+        </form>
+      
+
+     </div>
+     
+     
+ </div>
+  
+
+
+
+<!-- <form action="/upload/profile" method="post" enctype="multipart/form-data">
     <input type="file" name="profileImage" id="">
-    <input type="submit" value="Update image">
-</form>
-<form method="POST" action="/user/edit">
 
-    <div>
-        <label>First Name</label>
-        <input name="firstName" type="text" value="<%= user.firstName %>" />
-    </div>
+    <input type="hidden" name="id" value="<%= user._id %>" />
+    <button type="submit">submit</button>
+</form> -->
 
-    <div>
-        <label>Last Name</label>
-        <input name="lastName" type="text" value="<%= user.lastName %>" />
-    </div>
-
-    <div>
-        <label>Email Address</label>
-        <input name="email" type="text" value="<%= user.emailAddress %>" disabled />
-
-    </div>
-
-    <div>
-        <label>Telephone Number</label>
-        <input name="telNumber" type="text" value="<%= user.telNumber %>" />
-    </div>
-    <button type="submit">Update info</button>
-
-</form>
-<form action="/user/edit/password" method="post">
-    <label for="oldPassword">Current password</label>
-    <input type="password" name="password" id="" required>
-    <label for="NewPassword">New password</label>
-    <input type="password" name="newPassword1" id="" required>
-    <input type="password" name="newPassword2" id="" required>
-    <button type="submit">Change password</button>
-</form>
