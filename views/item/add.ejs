@@ -1,6 +1,6 @@
 <h1>Add item</h1>
 
-<form method="POST" action="/item/add">
+<form method="POST" action="/item/add" enctype="multipart/form-data">
     <label>Item Name</label>
     <input name="itemName" type="text" required />
 
@@ -26,7 +26,6 @@
         <option value="electronics">electronics</option>
         <option value="other">other</option>
     </select>
-
-    <button type="submit">Next</button>
-
+    <input type="file" name="itemImage" id="" required>
+    <input type="submit" value="submit">
 </form>

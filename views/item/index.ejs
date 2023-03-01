@@ -1,5 +1,35 @@
 <h1> item list </h1>
-
+<form action="/item/index" method="get">
+    <label for="sort">Sort by</label>
+    <select name="sort" id="">
+        <option value="empty"></option>
+        <option value="priceUp">Price: low to high</option>
+        <option value="priceDown">Price: high to low</option>
+        <option value="newest">newest</option>
+        <option value="oldest">oldest</option>
+    </select>
+    <label for="category">Category</label>
+    <select name="category" id="">
+        <option value="all">All</option>
+        <option value="home_appliances">Home Appliances</option>
+        <option value="electronics">Electronics</option>
+        <option value="other">Other</option>
+    </select>
+    <label for="condition">Condition</label>
+    <select name="condition" id="">
+        <option value="all">all</option>
+        <option value="new">New</option>
+        <option value="good">Good</option>
+        <option value="old">Old</option>
+    </select>
+    <label for="availability">Availability</label>
+    <select name="availability" id="">
+        <option value="all">all</option>
+        <option value="available">available</option>
+        <option value="notAvailable">Not Available</option>
+    </select>
+    <input type="submit" value="filter">
+</form>
 <% items.forEach(function(item){ %>
 
     <div>

@@ -1,31 +1,39 @@
 <h1>Edit item</h1>
-
-<form method="POST" action="/item/add">
-<div>
+<form method="POST" action="/item/edit/details?id=<%= item._id %>">
     <label>Item Name</label>
-    <input name="itemName" type="text" value="<%= item.itemName %>"/>
-</div>
-<div>
+    <input name="itemName" type="text" value="<%= item.itemName %>" required />
+
     <label>Item description</label>
-    <textarea name="description"> <%= item.description%> </textarea>
-</div>
-<div>
-    <label>Item price</label>
-    <input name="priceRate" type="text" value="<%= item.priceRate %>"/>
-</div>
-<div>
+    <textarea name="description" value="<%= item.description %>" required><%= item.description %></textarea>
+
+    <label>Price pre day</label>
+    <input name="priceRate" type="number" value="<%= item.priceRate %>" min="0" required />
+
+    <label>Dopsite amount</label>
+    <input name="deposit" type="number" value="<%= item.deposit %>" min="0" required />
+
     <label>Item condition</label>
-    <input name="condition" type="text" value="<%= item.condition %>"/>
-</div>
-<div>
+    <select name="condition" id="condition" required>
+        <option value="new">new</option>
+        <option value="good">good</option>
+        <option value="old">old</option>
+    </select>
+
     <label>Item Type</label>
-    <input name="type" type="text" value="item.type"/>
-</div>
+    <select name="type" id="type" required>
+        <option value="home appliances">home appliances</option>
+        <option value="electronics">electronics</option>
+        <option value="other">other</option>
+    </select>
 
-<input type="hidden" name="id" value="<%= item._id %>"/>
-
-<button type="submit">Edit item</button>
+    <button type="submit">Update</button>
 
 </form>
-
-
+<br>
+<br>
+<br>
+<form action="/item/addimg?id=<%= item._id %>" method="post" enctype="multipart/form-data">
+    <img src="/images/items/<%= item.itemImage %>" alt="item picture" width="200" height="200">
+    <input type="file" name="itemImage" id="" required>
+    <button type="submit">submit item</button>
+</form>

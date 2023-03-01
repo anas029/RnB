@@ -1,6 +1,7 @@
 .env
 node_modules
 public/styles/main.css.map
+public/styles/main.css
 public/theming-kit.html
 src
 task.txt
