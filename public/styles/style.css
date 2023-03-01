@@ -52,6 +52,13 @@
     height: 100%;
 }
 
+.dropdown select {
+    border-radius: 5px;
+    outline: 1px #3f404112 solid;
+    margin-right: 5px;
+    padding: 6px 0px;
+}
+
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -71,34 +78,34 @@ input[type=number] {
 }
 
 
-    .pic{
-        
-        position: relative;
-        align-items: center;
-        top: 40%;
-        right: -40%;
-        border-radius: 100%;
-        padding: 15px;
-    }
-    
-    .edit{ 
+.pic {
+
+    position: relative;
+    align-items: center;
+    top: 40%;
+    right: -40%;
+    border-radius: 100%;
+    padding: 15px;
+}
+
+.edit {
     position: relative;
     align-items: center;
     /* top: 0%; */
     top: 50%;
     right: -42%;
-    }
+}
 
-    
-    
 
-    
-    #updatebtn{
-        position: relative;
-        align-items: center;
-        display: flex;
-        padding: 5px;
-        margin: 5px;
-        right: -42%;
-        /* top: -40%; */
-    }
+
+
+
+#updatebtn {
+    position: relative;
+    align-items: center;
+    display: flex;
+    padding: 5px;
+    margin: 5px;
+    right: -42%;
+    /* top: -40%; */
+}
