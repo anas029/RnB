@@ -38,6 +38,46 @@
           <hr>
           <div class="row">
             <div class="col-sm-3">
+              <p class="mb-0">credit amount:</p>
+            </div>
+            <div class="col-sm-9">
+              BD<%= user.credit %>
+            </div> 
+             
+            <hr>
+        </div>
+                  
+        <div>
+          <div class="row">
+            <div class="col-sm-3">
+              <p class="mb-0">Rating:</p>
+            </div>
+            <div class="col-sm-9">
+              
+          <% let point=0%>
+
+            <% let total=0%>
+
+              <% for (const key in user.item) { %>
+                <% for (const index in user.item[key].review) { %>
+                  <%point+= user.item[key].review[index].score %>
+                    <%total++ %>
+                      <% } %>
+                        <% } %>
+                          <% if (total) { %>
+                            <p class="text-muted mb-0">
+                              <%=`${Math.round(( point/total)*10)/10}, number of reviews: ${total}` %>
+                            </p>
+                            <%=`${Math.round(( point/total)*10)*(10/5)}, number of reviews: ${total}` %>
+                              <% } else { %>
+                                no reviews yet
+                                <% } %>
+                              </div>
+
+        </div>
+         <hr>
+          <div class="row">
+            <div class="col-sm-3">
               <p class="mb-0">Email</p>
             </div>
             <div class="col-sm-9">
@@ -58,37 +98,7 @@
                 </a></p>
             </div>
           </div>
-          <hr>
-
-
-          <div class="col-sm-9">
-
-          </div>
-          <div>credit amount: BD<%= user.credit %>
-              <hr>
-          </div>
-          <div>
-            Rating:
-            <% let point=0%>
-
-              <% let total=0%>
-
-                <% for (const key in user.item) { %>
-                  <% for (const index in user.item[key].review) { %>
-                    <%point+= user.item[key].review[index].score %>
-                      <%total++ %>
-                        <% } %>
-                          <% } %>
-                            <% if (total) { %>
-                              <p class="text-muted mb-0">
-                                <%=`${Math.round(( point/total)*10)/10}, number of reviews: ${total}` %>
-                              </p>
-                              <%=`${Math.round(( point/total)*10)*(10/5)}, number of reviews: ${total}` %>
-                                <% } else { %>
-                                  no reviews yet
-                                  <% } %>
-
-          </div>
+         
         </div>
       </div>
     </div>
