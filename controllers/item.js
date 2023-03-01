@@ -133,7 +133,7 @@ function item_return_post(req, res) {
             if (!item.isAvailable) {
                 const balance = item.dopiste - (
                     item.priceRate * Math.ceil((Date.now() - item.borrowDate) / (1000 * 60 * 60 * 24)))
-                User.findById(item.borrower)
+                User.findById(item.borrower.id)
                     .then(user => {
                         user.credit += balance
                         user.save()
@@ -149,11 +149,11 @@ function item_return_post(req, res) {
                 data.item = item._id
                 const review = new Review(data)
                 review.save()
-                    .then(res.redirect("/"))
-                    .catch(err => console.log(err))
+                    .then(res.redirect("/user/myprofile"))
+                    .catch(err => console.log(err.message))
             }
         })
-        .catch(err => console.log(err))
+        .catch(err => console.log(err.message))
 }
 //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\//
 // EDIT
