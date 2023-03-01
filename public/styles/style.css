@@ -24,6 +24,21 @@
     -moz-user-select: none;
     user-select: none;
 }
+.itemsP{
+    margin: 40px auto;
+    
+  
+}
+.itemC{
+    padding: 40px;
+    margin: 0 auto;
+    text-align: center;
+
+}
+.bgd{
+    background-color: #EEEEEE ;
+
+}
 
 @media (min-width: 768px) {
     .bd-placeholder-img-lg {
