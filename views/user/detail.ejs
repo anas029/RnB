@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <style>
   body{
     /* background-color: #eee; */
@@ -68,34 +67,6 @@
             <div class="col-sm-9">
               
    <% let point=0%>
-=======
-<h1> Users detail </h1>
-<div>
-  <img src="/images/profile/<%= user.profileImage %>" alt="profile picture" width="200" height="200">
-
-</div>
-<div>
-  Username: <%= user.username %>
-</div>
-<div>
-  Email Address: <a href="mailto:<%= user.emailAddress %>">
-    <%= user.emailAddress %>
-  </a>
-</div>
-<div>
-
-  Mobile Number: <a href="tel:+<%= user.telNumber %>">
-    <%= user.telNumber %>
-  </a>
-</div>
-<div>
-  <% const options={ year: 'numeric' , month: 'long' } %>
-    User since: <%= user.createdAt.toLocaleDateString('en-US', options) %>
-</div>
-<div>
-  Rating:
-  <% let point=0%>
->>>>>>> b1fb1a91252f3a1459c9b1af77f62fca565261aa
     <% let total=0%>
 
       <% for (const key in user.item) { %>
