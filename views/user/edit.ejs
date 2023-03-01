@@ -1,71 +1,53 @@
-<style>
-    .pic{
-        position: relative;
-        align-items: center;
-        top: 50%;
-        right: -40%;
-        border-radius: 50%;
-    }
-    .edit{ 
-    position: relative;
-    align-items: center;
-    /* top: 0%; */
-    top: 50%;
-    right: -42%;
-    }
-    #updatebtn{
-        position: relative;
-        align-items: center;
-        display: flex;
-        padding: 5px;
-        margin: 5px;
-        right: -42%;
-        /* top: -40%; */
-    }
-
-    
-    </style>
-
 <!-- edit profile pix layout -->
 
  <div class="container py-5" >
 
     <h2 class="edit">Edit Profile</h2>
-    <form action="/user/edit/img" method="post" enctype="multipart/form-data">
-     <img src="/images/profile/<%= user.profileImage %>" alt="profile picture" width="200" height="200" class="pic">
-     <div class="col-md-3">
-        <input type="file" name="profileImage" >
-     </div> 
-     <hr>
-     <div class="col-md-3">
-        <button type="submit" >Update image</button>
-     </div >
-    
+       <form action="/user/edit/img"  method="post" enctype="multipart/form-data">
+     
+        <img src="/images/profile/<%= user.profileImage %>" alt="profile picture" width="200" height="200" class="pic">
+     
+        
+     
+     <div class="row align-items-center justify-content-around row g-3">
+               
+         <div class="col-9">
+            
+            <input class="form-control" type="file" name="profileImage">
+            
+          </div>
+          <div class="col-3">
+            
+            <button type="submit" class="btn btn-outline-primary ms-1" >Update image</button>
+          </div>
+          
+     </div>
+     
     </form>
 <!-- edit form layout -->
 
     <div class="row g-3">
 
-        <form class="row g-3" method="POST" action="/user/edit" >
-            <div class="col-md-3">
+        <form class="row g-3 justify-content-around" method="POST" action="/user/edit" >
+            <div class="col-md-2">
                 <label>First Name</label>
               <input name="firstName" type="text" class="form-control" value="<%= user.firstName %>">
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <label>Last Name</label>
               <input name="lastName" type="text" class="form-control" value="<%= user.lastName %>">
               </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <label>Email Address</label>
               <input name="emailAddred" type="email" class="form-control" value="<%= user.emailAddress %>" disabled >
             </div>
-            <div class="col-md-3">
-                <label>Telephone Number</label>
+            <div class="col-md-2">
+                <label>Mobile Number</label>
               <input name="telNumber" type="text" class="form-control" value="<%= user.telNumber %>">
               </div>
-              <hr>
-              <div class="col-md-3">
-                <button type="submit">Update info</button>
+            <div class="col-md-2 d-flex align-items-end">
+
+                <input type="submit" class="btn btn-outline-primary ms-1" value="Update info">
               </div>
     
             </form>
@@ -73,23 +55,22 @@
      </div>
      
 <!-- edit password change layout -->
-     <div class="row g-2" >
+     <div class="row g-3" >
         <form class="row g-3" action="/user/edit/password" method="post">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <!-- <label for="oldPassword">Current password</label> -->
                 <input type="password" placeholder="Current Password"  name="password" id="" required> 
             </div> 
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <!-- <label for="NewPassword">New password</label> -->
             <input type="password" placeholder="New Password" name="newPassword1" id="" required>
-            
             </div> 
-            <div class="col-md-4">
+            <div class="col-md-3">
             <input type="password" placeholder="Confirm Password" name="newPassword2" id="" required>
             </div> 
-            <hr>
-            <div class="col-md-4">
-                <button type="submit">Change password</button>
+            
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-outline-primary ms-1">Change password</button>
             </div> 
             
         </form>
