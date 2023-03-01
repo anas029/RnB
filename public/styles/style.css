@@ -12,6 +12,11 @@
     color: #0d6efd;
 }
 
+.up-logo {
+    /* display: flex; */
+    flex-direction: column;
+}
+
 .bd-placeholder-img {
     font-size: 1.125rem;
     text-anchor: middle;
@@ -19,19 +24,27 @@
     -moz-user-select: none;
     user-select: none;
 }
-.itemsP{
+
+.itemsP {
     margin: 40px auto;
-    
-  
+
+
 }
-.itemC{
+
+.itemC {
     padding: 40px;
     margin: 0 auto;
     text-align: center;
 
 }
-.bgd{
-    background-color: #EEEEEE ;
+
+.bgd {
+    background-color: #EEEEEE;
+
+}
+
+.reg>a {
+    padding-top: 10px;
 
 }
 
