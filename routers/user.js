@@ -3,9 +3,9 @@ const router = express.Router()
 const userCntrl = require('../controllers/user')
 const isLoggedIn = require('../lib/isLoggedIn');
 const upload = require('../lib/upload')
-
+const server = require('../server');
 //CALL API:
-router.get('/myProfile', isLoggedIn, userCntrl.user_myProfile_get)
+router.get('/myProfile', server.auth_isLogin_post, userCntrl.user_myProfile_get)
 router.get('/edit', isLoggedIn, userCntrl.user_edit_get)
 router.post('/edit', isLoggedIn, userCntrl.user_edit_post)
 router.post('/edit/img', isLoggedIn, upload.single('profileImage'), userCntrl.user_editImg_post)

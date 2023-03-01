@@ -28,10 +28,10 @@ function auth_signin_get(req, res) {
     res.render('auth/signin')
 }
 const auth_signin_post = passport.authenticate('local', {
-    // successReturnToOrRedirect: '/',
-    successRedirect: '/',
+    successReturnToOrRedirect: '/',
+    // successRedirect: '/',
     failureRedirect: '/auth/signin',
-    // failureFlash: true
+    failureFlash: true
 })
 
 function auth_signout_get(req, res) {
