@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <section style="background-color: #eee;">
     <div class="container py-5">
       
@@ -14,6 +15,32 @@
                     <% if (!item.isAvailable) { %>
                         borrower: <%= item.borrower.username %>
                             borrowed date <%= item.borrowDate %>
+=======
+<h2>
+    <%= item.title %>
+</h2>
+<div>
+    <img src="/images/items/<%= item.itemImage %>" alt="item picture" width="200" height="200">
+
+    <%= item.itemName %>
+        Description: <%= item.description %>
+            Price per day: <%= item.priceRate %>
+                condition: <%= item.condition %>
+                    owner: <a href="/user/detail?id=<%= item.owner._id %>">
+                        <%= item.owner.username %>
+                    </a>
+</div>
+<div>
+    <% if (item.numOfReview) { %>
+        <% let point=0%>
+            <% for (const key in item.review) { %>
+                <%point+= item.review[key].score %>
+                    <% } %>
+                        <%= `rating: ${Math.round((point/ item.review.length)*(100/5)*10)/10}%, number of reviews:
+                            ${item.review.length}` %>
+                            <% } else { %>
+                                no review yet
+>>>>>>> b1fb1a91252f3a1459c9b1af77f62fca565261aa
                                 <% } %>
                                     <% } else { %>
                                         <% if (item.isAvailable) { %>
@@ -26,6 +53,7 @@
                 <% if ((!item.isAvailable)&&item.borrower.id.toString()===user._id.toString()) { %>
                     <a href="/item/return?id=<%= item._id %>">return</a>
                     <% } %>
+<<<<<<< HEAD
             </div>
             </div>
           </div>
@@ -82,6 +110,11 @@
                     <% let point=0%>
                         <% for (const key in item.review) { %>
                             <%point+= item.review[key].score %>
+=======
+                        <% } else { %>
+                            <% if (item.isAvailable) { %>
+                                <a href="/item/borrow?id=<%= item._id %>">Rent it</a>
+>>>>>>> b1fb1a91252f3a1459c9b1af77f62fca565261aa
                                 <% } %>
                                     <%= `rating: ${Math.round((point/ item.review.length)*(100/5)*100)/100}%` %>
                                         <% } else { %>

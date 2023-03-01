@@ -10,8 +10,8 @@ router.get('/index', itemCntrl.item_index_get)
 router.get('/details', itemCntrl.item_details_get)
 //ADD
 router.get('/add', isLoggedIn, itemCntrl.item_create_get)
-router.post('/add', upload.single('itemImage'), isLoggedIn, itemCntrl.item_create_post)
-router.get('/addimg', isLoggedIn, itemCntrl.item_addImg_get)
+router.post('/add', isLoggedIn, upload.single('itemImage'), itemCntrl.item_create_post)
+// router.get('/addimg', isLoggedIn, itemCntrl.item_addImg_get)
 //EDIT
 router.get('/edit', isLoggedIn, itemCntrl.item_edit_get)
 router.post('/edit/details', isLoggedIn, itemCntrl.item_edit_post)

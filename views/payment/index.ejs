@@ -1,5 +1,8 @@
 <h1>Payment</h1>
-
+<p>Hi, <%= `${user.firstName} ${user.lastName}` %>
+</p>
+<p>Your balance: <%= `BD ${user.credit}` %>
+</p>
 <form method="POST" action="/payment/">
     <div>
         <label>Card Name</label>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <section style="background-color: #eee;">
   <div class="container py-5">
     
@@ -67,6 +68,40 @@
             <div class="col-sm-9">
               
    <% let point=0%>
+=======
+<h1>My profile</h1>
+
+<div>
+  <img src="/images/profile/<%= user.profileImage %>" alt="profile picture" width="200" height="200">
+
+</div>
+<div>
+  Name: <%= `${user.firstName} ${user.lastName}` %>
+
+</div>
+
+<div>
+  Username:<%= user.username %>
+</div>
+
+
+<div>
+  email Address: <a href="mailto:<%= user.emailAddress %>">
+    <%= user.emailAddress %>
+  </a>
+</div>
+<div>
+
+  Mobile Number: <a href="tel:+<%= user.telNumber %>">
+    <%= user.telNumber %>
+  </a>
+</div>
+<div>credit amount: BD<%= user.credit %>
+</div>
+<div>
+  Rating:
+  <% let point=0%>
+>>>>>>> b1fb1a91252f3a1459c9b1af77f62fca565261aa
     <% let total=0%>
 
       <% for (const key in user.item) { %>
@@ -76,7 +111,11 @@
               <% } %>
                 <% } %>
                   <% if (total) { %>
+<<<<<<< HEAD
                     <p class="text-muted mb-0">  <%=`${Math.round(( point/total)*10)/10}, number of reviews: ${total}` %></p>
+=======
+                    <%=`${Math.round(( point/total)*10)*(10/5)}, number of reviews: ${total}` %>
+>>>>>>> b1fb1a91252f3a1459c9b1af77f62fca565261aa
                       <% } else { %>
                         no reviews yet
                         <% } %>
