@@ -147,7 +147,8 @@
             <div class="card shadow-sm">
               <img src="/images/items/<%= user.borrowedItem[key].itemImage %>" alt="item picture"
                 class="bd-placeholder-img card-img-top cover-img" width="100%" height="225" role="img"
-                aria-label="<%= user.item[key].itemName %>" preserveAspectRatio="xMidYMid slice" focusable="false">
+                aria-label="<%= user.borrowedItem[key].itemName %>" preserveAspectRatio="xMidYMid slice"
+                focusable="false">
               <div class="card-body">
                 <h3 class="cap">
                   <%= user.borrowedItem[key].itemName %>
@@ -157,9 +158,11 @@
                 </p>
                 <div class="btn-group mb-4">
 
-                  <a href="/item/details?id=<%= user.item[key]._id %>" class="btn btn-outline-primary ms-1">View</a>
-                  <a href="/item/edit?id=<%= user.item[key]._id %>" class="btn btn-outline-primary ms-1">Edit</a>
-                  <a href="/item/delete?id=<%= user.item[key]._id %>" class="btn btn-outline-primary ms-1">delete</a>
+                  <a href="/item/details?id=<%= user.borrowedItem[key]._id %>"
+                    class="btn btn-outline-primary ms-1">View</a>
+
+                  <a href="/item/return?id=<%= user.borrowedItem[key]._id %>"
+                    class="btn btn-outline-primary ms-1">Return</a>
 
 
                 </div>
@@ -168,7 +171,7 @@
           </div>
           <% } %>
             <% } else { %>
-              <p>no item listed yet</p>
+              <p>no item rented yet</p>
               <% } %>
     </div>
   </div>
