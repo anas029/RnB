@@ -40,3 +40,36 @@
         font-size: 3.5rem;
     }
 }
+
+
+    .pic{
+        
+        position: relative;
+        align-items: center;
+        top: 40%;
+        right: -40%;
+        border-radius: 100%;
+        padding: 15px;
+    }
+    
+    .edit{ 
+    position: relative;
+    align-items: center;
+    /* top: 0%; */
+    top: 50%;
+    right: -42%;
+    }
+
+    
+    
+
+    
+    #updatebtn{
+        position: relative;
+        align-items: center;
+        display: flex;
+        padding: 5px;
+        margin: 5px;
+        right: -42%;
+        /* top: -40%; */
+    }
