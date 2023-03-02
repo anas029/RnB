@@ -30,6 +30,17 @@ app.use((req, res, next) => {
     next()
 })
 
+
+// Set up flash messages middleware
+app.use((req, res, next) => {
+    if (req.session.flashMessage) {
+        res.locals.flashMessage = req.session.flashMessage;
+        delete req.session.flashMessage;
+    }
+    next();
+});
+
+
 //static folder
 app.use(express.static('public'))
 //node.js to look in a folder 
@@ -48,7 +59,10 @@ const reviewRouter = require('./routers/review')
 const userRouter = require('./routers/user')
 const itemRouter = require('./routers/item')
 const paymentRouter = require('./routers/payment')
-
+app.get('/', (req, res) => {
+    req.session.flashMessage = 'Welcome to my website!';
+    res.render('home/index');
+});
 //Mount Routes
 app.use('/', indexRouter)
 app.use('/auth', authRouter)

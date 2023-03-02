@@ -32,7 +32,8 @@ function item_index_get(req, res) {
             res.render("item/index", { items })
         })
         .catch(err => {
-            console.log(err);
+            req.session.flashMessage = err.message
+            res.redirect('/item/index')
         })
 }
 
@@ -41,9 +42,12 @@ function item_details_get(req, res) {
     Item.findById(req.query.id).populate('owner').populate('borrower').populate('review').populate('numOfReview')
         .then(item => {
             console.log(item)
-            res.render("item/details", { item, user: req.user })
+            res.render("item/details", { item })
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+            req.session.flashMessage = err.message
+            res.redirect('/item/index')
+        })
 }
 //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\//
 //ADD
@@ -61,8 +65,8 @@ function item_create_post(req, res) {
             res.redirect("/user/myprofile")
         })
         .catch((err) => {
-            console.log(err.message);
-            res.send("Please try again later!!!");
+            req.session.flashMessage = err.message
+            res.redirect('/item/index')
         })
 }
 
@@ -78,8 +82,12 @@ function item_addImg_post(req, res) {
                 item.itemImage = req.file.filename
                 item.save()
                     .then(res.redirect('/user/myProfile'))
-                    .catch(e => res.send(e.message))
+                    .catch(e => {
+                        req.session.flashMessage = err.message
+                        res.redirect('/item/index')
+                    })
             } else {
+                req.session.flashMessage = 'Sign in Please!'
                 res.redirect('/auth/signin')
             }
         })
@@ -92,9 +100,12 @@ function item_borrow_get(req, res) {
     Item.findById(req.query.id).populate('owner').populate('borrower')
         .then(item => {
             if (item.isAvailable)
-                res.render("item/borrowItem", { item, user: req.user })
+                res.render("item/borrowItem", { item })
         })
-        .catch(err => console.log(err.message))
+        .catch(err => {
+            req.session.flashMessage = err.message
+            res.redirect('/item/index')
+        })
 }
 // HTTP POST - Borrow
 function item_borrow_post(req, res) {
@@ -110,10 +121,13 @@ function item_borrow_post(req, res) {
                 item.borrower = req.user._id
                 item.borrowDate = Date.now()
                 item.save()
-                res.render("item/borrowItem", { item, user: req.user })
+                res.render("user/myprofile", { item, user: req.user })
             }
         })
-        .catch(err => console.log(err.message))
+        .catch(err => {
+            req.session.flashMessage = err.message
+            res.redirect('/item/index')
+        })
 }
 //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\//
 // RETURN
@@ -122,9 +136,13 @@ function item_return_get(req, res) {
     Item.findById(req.query.id).populate('owner').populate('borrower')
         .then(item => {
             if (!item.isAvailable)
-                res.render("item/returnItem", { item, user: req.user })
+                res.render("item/returnItem", { item })
         })
-        .catch(err => console.log(err.message))
+        .catch(err => {
+            req.session.flashMessage = 'Something went wrong'
+            console.log(err);
+            res.redirect('/item/index')
+        })
 }
 // HTTP POST - Return
 function item_return_post(req, res) {
@@ -151,10 +169,18 @@ function item_return_post(req, res) {
                 const review = new Review(data)
                 review.save()
                     .then(res.redirect("/user/myprofile"))
-                    .catch(err => console.log(err.message))
+                    .catch(err => {
+                        req.session.flashMessage = 'Something went wrong'
+                        console.log(err);
+                        res.redirect('/item/index')
+                    })
             }
         })
-        .catch(err => console.log(err.message))
+        .catch(err => {
+            req.session.flashMessage = 'Something went wrong'
+            console.log(err);
+            res.redirect('/item/index')
+        })
 }
 //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\//
 // EDIT
@@ -163,11 +189,12 @@ function item_edit_get(req, res) {
     Item.findById(req.query.id).populate('owner').populate('borrower')
         .then(item => {
             if (item.isAvailable)
-                res.render("item/edit", { item, user: req.user })
+                res.render("item/edit", { item })
         })
         .catch(err => {
-            console.log(err)
-            res.redirect('/')
+            req.session.flashMessage = 'Something went wrong'
+            console.log(err);
+            res.redirect('/item/index')
         })
 }
 // HTTP POST - Edit
@@ -178,7 +205,9 @@ function item_edit_post(req, res) {
             res.redirect("/user/myProfile");
         })
         .catch((err) => {
+            req.session.flashMessage = 'Something went wrong'
             console.log(err);
+            res.redirect('/item/index')
         })
 }
 ///-
@@ -187,18 +216,25 @@ function item_edit2_get(req, res) {
     Item.findById(req.query.id).populate('owner').populate('borrower')
         .then(item => {
             if (item.isAvailable)
-                res.render("item/edit2", { item, user: req.user })
+                res.render("item/edit2", { item })
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+            req.session.flashMessage = 'Something went wrong'
+            console.log(err);
+            res.redirect('/item/index')
+        })
 }
 //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\//
 // DELETE
 // HTTP GET - Delete
 function item_delete_get(req, res) {
     Item.findOneAndDelete({ _id: req.query.id, isAvailable: true, owner: req.user._id }, function (err, docs) {
-        if (err) { console.log(err) }
+        if (err) {
+            req.session.flashMessage = 'Something went wrong'
+            console.log(err);
+            res.redirect('/item/index')
+        }
         else {
-            console.log("Deleted User : ", docs)
             res.redirect('/user/myprofile')
         }
     })
