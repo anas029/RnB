@@ -41,7 +41,7 @@ function item_details_get(req, res) {
     Item.findById(req.query.id).populate('owner').populate('borrower').populate('review').populate('numOfReview')
         .then(item => {
             console.log(item)
-            res.render("item/details", { item, user: req.user })
+            res.render("item/details", { item })
         })
         .catch(err => console.log(err))
 }
@@ -92,7 +92,7 @@ function item_borrow_get(req, res) {
     Item.findById(req.query.id).populate('owner').populate('borrower')
         .then(item => {
             if (item.isAvailable)
-                res.render("item/borrowItem", { item, user: req.user })
+                res.render("item/borrowItem", { item })
         })
         .catch(err => console.log(err.message))
 }
@@ -110,7 +110,7 @@ function item_borrow_post(req, res) {
                 item.borrower = req.user._id
                 item.borrowDate = Date.now()
                 item.save()
-                res.render("item/borrowItem", { item, user: req.user })
+                res.render("user/myprofile", { item, user: req.user })
             }
         })
         .catch(err => console.log(err.message))
@@ -122,7 +122,7 @@ function item_return_get(req, res) {
     Item.findById(req.query.id).populate('owner').populate('borrower')
         .then(item => {
             if (!item.isAvailable)
-                res.render("item/returnItem", { item, user: req.user })
+                res.render("item/returnItem", { item })
         })
         .catch(err => console.log(err.message))
 }
@@ -163,7 +163,7 @@ function item_edit_get(req, res) {
     Item.findById(req.query.id).populate('owner').populate('borrower')
         .then(item => {
             if (item.isAvailable)
-                res.render("item/edit", { item, user: req.user })
+                res.render("item/edit", { item })
         })
         .catch(err => {
             console.log(err)
@@ -187,7 +187,7 @@ function item_edit2_get(req, res) {
     Item.findById(req.query.id).populate('owner').populate('borrower')
         .then(item => {
             if (item.isAvailable)
-                res.render("item/edit2", { item, user: req.user })
+                res.render("item/edit2", { item })
         })
         .catch(err => console.log(err))
 }
@@ -198,7 +198,6 @@ function item_delete_get(req, res) {
     Item.findOneAndDelete({ _id: req.query.id, isAvailable: true, owner: req.user._id }, function (err, docs) {
         if (err) { console.log(err) }
         else {
-            console.log("Deleted User : ", docs)
             res.redirect('/user/myprofile')
         }
     })
