@@ -12,7 +12,7 @@
 
 # ERD
 
-![This is an image](https://i.ibb.co/RTyjz0J/Screenshot-2023-03-01-at-11-47-58-AM.png)
+![This is an image](https://i.ibb.co/r3311qm/Screenshot-2023-03-01-at-11-47-58-AM.png)
 
 ##  Technical list 
 * Multer, 
@@ -28,6 +28,6 @@ we used Bootstrap makes responsive web design a reality. It makes it possible fo
 
 ## wireframes
 
-![This is an image](https://i.ibb.co/Z2jzLjV/Screenshot-2023-03-01-at-11-46-51-AM.png)
+![This is an image](https://i.ibb.co/QMQTynx/Screenshot-2023-03-01-at-11-46-51-AM.png)
 
 
