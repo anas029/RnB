@@ -1,6 +1,6 @@
 <h1>Borrow Item<%= item.itemName %>
 </h1>
-<p>User <%= locals.user525.username %>
+<p>User <%= locals.user525.credit %>
 </p>
 <!-- new layout ----------------------------------------------------------- -->
 
@@ -20,6 +20,19 @@
       <div class="col-lg-6">
         <div class="card mb-4">
           <div class="card-body ">
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">
+                  <%= locals.user525.username %>, your available credit
+                </p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">
+                  <%= locals.user525.credit %>
+                </p>
+              </div>
+            </div>
+            <hr>
             <div class="row">
               <div class="col-sm-3">
                 <p class="mb-0">Item Name</p>
