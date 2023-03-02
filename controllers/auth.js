@@ -33,8 +33,10 @@ const auth_signin_post = passport.authenticate('local', {
 
 function auth_signout_get(req, res) {
     req.logout(function (err) {
-        if (err)
+        if (err) {
+            req.session.flashMessage = err.message
             return next(err)
+        }
         res.redirect('/')
     })
 }
