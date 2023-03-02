@@ -1,3 +1,12 @@
+.flash-message {
+    background-color: #d81313be;
+    color: black;
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+    color: aliceblue;
+}
+
 .cover-img {
     object-fit: cover;
 }
