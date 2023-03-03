@@ -20,30 +20,33 @@
                 <label for="sort">Sort by </label>
                 <select name="sort" id="">
                     <option value="empty"></option>
-                    <option value="priceUp">Price: low to high</option>
-                    <option value="priceDown">Price: high to low</option>
-                    <option value="newest">newest</option>
-                    <option value="oldest">oldest</option>
+                    <option value="priceUp" <%=query.sort=="priceUp" ?'selected':'' %>>Price: low to high</option>
+                    <option value="priceDown" <%=query.sort=="priceDown" ?'selected':'' %>>Price: high to low</option>
+                    <option value="newest" <%=query.sort=="newest" ?'selected':'' %>>newest</option>
+                    <option value="oldest" <%=query.sort=="oldest" ?'selected':'' %>>oldest</option>
                 </select>
                 <label for="category">Category </label>
                 <select name="category" id="">
                     <option value="all">All</option>
-                    <option value="home_appliances">Home Appliances</option>
-                    <option value="electronics">Electronics</option>
-                    <option value="other">Other</option>
+                    <option value="home_appliances" <%=query.category=="home_appliances" ?'selected':'' %>>Home
+                        Appliances </option>
+                    <option value="electronics" <%=query.category=="electronics" ?'selected':'' %>>Electronics
+                    </option>
+                    <option value="other" <%=query.category=="other" ?'selected':'' %>>Other</option>
                 </select>
                 <label for="condition">Condition </label>
                 <select name="condition" id="">
                     <option value="all">all</option>
-                    <option value="new">New</option>
-                    <option value="good">Good</option>
-                    <option value="old">Old</option>
+                    <option value="new" <%=query.condition=="new" ?'selected':'' %>>New</option>
+                    <option value="good" <%=query.condition=='good' ?'selected':'' %>>Good</option>
+                    <option value="old" <%=query.condition=='old' ?'selected':'' %>>Old</option>
                 </select>
                 <label for="availability">Availability </label>
                 <select name="availability" id="">
                     <option value="all">all</option>
-                    <option value="available">available</option>
-                    <option value="notAvailable">Not Available</option>
+                    <option value="available" <%=query.availability=='available' ?'selected':'' %>>available</option>
+                    <option value="notAvailable" <%=query.availability=='notAvailable' ?'selected':'' %>>Not Available
+                    </option>
                 </select>
                 <input type="submit" value="filter" class="btn btn-secondary my-2">
             </form>

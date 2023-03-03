@@ -29,7 +29,7 @@ function item_index_get(req, res) {
 
     Item.find(filter).sort(data).populate('owner').populate('borrower').populate('review').populate('numOfReview')
         .then(items => {
-            res.render("item/index", { items })
+            res.render("item/index", { items, query: req.query })
         })
         .catch(err => {
             req.session.flashMessage = err.message
@@ -91,7 +91,11 @@ function item_addImg_post(req, res) {
                 res.redirect('/auth/signin')
             }
         })
-        .catch(e => res.send(e.message))
+        .catch(e => {
+            req.session.flashMessage = 'Something went wrong'
+            console.log(e);
+            res.redirect('/item/index')
+        })
 }
 //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\//
 // BORROW
@@ -100,7 +104,7 @@ function item_borrow_get(req, res) {
     Item.findById(req.query.id).populate('owner').populate('borrower')
         .then(item => {
             if (item.isAvailable)
-                res.render("item/borrowItem", { item })
+                res.render("item/borrowItem", { item, user: req.user })
         })
         .catch(err => {
             req.session.flashMessage = err.message
@@ -112,7 +116,7 @@ function item_borrow_post(req, res) {
     Item.findById(req.query.id)
         .then(item => {
             if (item.isAvailable) {
-                User.findById(req.user._id)
+                User.findById(req.user._id).populate('item')
                     .then(user => {
                         user.credit -= item.deposit
                         user.save()
@@ -121,7 +125,7 @@ function item_borrow_post(req, res) {
                 item.borrower = req.user._id
                 item.borrowDate = Date.now()
                 item.save()
-                res.render("user/myprofile", { item, user: req.user })
+                res.redirect("/user/myprofile")
             }
         })
         .catch(err => {
@@ -136,7 +140,7 @@ function item_return_get(req, res) {
     Item.findById(req.query.id).populate('owner').populate('borrower')
         .then(item => {
             if (!item.isAvailable)
-                res.render("item/returnItem", { item })
+                res.render("item/returnItem", { item, user: req.user })
         })
         .catch(err => {
             req.session.flashMessage = 'Something went wrong'

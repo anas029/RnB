@@ -8,7 +8,9 @@ function user_myProfile_get(req, res, next) {
             res.render("user/myProfile", { user });
         })
         .catch(err => {
+            req.session.flashMessage = 'Something went wrong'
             console.log(err);
+            res.redirect('/item/index')
         })
 }
 
