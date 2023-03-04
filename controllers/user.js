@@ -104,21 +104,21 @@ function user_message_get(req, res) {
     function retrieveMessages() {
         let count = 0;
         const getNextMessage = (id) => {
-            if (id !== null) {
+            if (id == null) {
+                res.render('messages/message', { msgs })
+            } else {
                 Message.findById(id)
                     .populate('sender')
                     .populate('receiver')
                     .then(msg => {
                         if (msg !== null && count < LIMIT) {
-                            msgs.push(msg)
+                            msgs.unshift(msg)
                             count++
                             getNextMessage(msg.previous);
-                        }
-                        res.render('messages/message', { msgs })
+                        } else
+                            res.render('messages/message', { msgs })
                     })
                     .catch(e => console.log(e));
-            } else {
-                res.render('messages/message', { msgs })
             }
         }
 
@@ -132,14 +132,14 @@ function user_message_get(req, res) {
                         .populate('receiver')
                         .then(msg => {
                             if (msg !== null) {
-                                msgs.push(msg);
+                                msgs.unshift(msg);
                                 getNextMessage(msg.previous)
-                            }
+                            } else
+                                res.render('messages/message', { msgs })
                         })
                         .catch(e => console.log(e))
                 } else {
-                    console.log('141')
-                    msgs.push(msg)
+                    msgs.unshift(msg)
                     getNextMessage(msg.previous)
                 }
             })
@@ -158,7 +158,6 @@ function user_inbox_post(req, res) {
     newMsg.save()
         .then(msg => {
             if (msg.previous !== null) {
-                console.log('line 188');
                 Message.findByIdAndUpdate(msg.previous, { $set: { next: msg._id } })
                     .then(preMsg => {
                         Message.findByIdAndUpdate(msg._id, { $set: { previous: preMsg._id } })
