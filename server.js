@@ -57,17 +57,16 @@ const indexRouter = require('./routers/index')
 const authRouter = require('./routers/auth')
 const reviewRouter = require('./routers/review')
 const userRouter = require('./routers/user')
+const inboxRouter = require('./routers/inbox')
 const itemRouter = require('./routers/item')
 const paymentRouter = require('./routers/payment')
-app.get('/', (req, res) => {
-    req.session.flashMessage = 'Welcome to my website!';
-    res.render('home/index');
-});
+
 //Mount Routes
 app.use('/', indexRouter)
 app.use('/auth', authRouter)
 app.use('/review', reviewRouter)
 app.use('/user', userRouter)
+app.use('/user', inboxRouter)
 app.use('/item/', itemRouter)
 app.use('/payment', paymentRouter)
 
