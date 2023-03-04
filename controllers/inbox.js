@@ -42,7 +42,7 @@ async function user_message_get(req, res) {
         const list = await getContactList(req)
         let receiver = req.query.id
         const msgs = new Array()
-        const LIMIT = 10
+        const LIMIT = 5
 
 
         function retrieveMessages() {
@@ -51,14 +51,14 @@ async function user_message_get(req, res) {
                 if (id == null) {
                     res.render('messages/message', { list, msgs, receiver })
                 } else {
-                    Message.findOne({ next: id })
+                    Message.findById(id)
                         .populate('sender')
                         .populate('receiver')
                         .then(msg => {
                             if (msg !== null && count < LIMIT) {
                                 msgs.unshift(msg)
                                 count++
-                                getNextMessage(msg._id);
+                                getNextMessage(msg.previous);
                             } else
                                 res.render('messages/message', { list, msgs, receiver })
                         })
@@ -77,14 +77,14 @@ async function user_message_get(req, res) {
                             .then(msg => {
                                 if (msg !== null) {
                                     msgs.unshift(msg);
-                                    getNextMessage(msg._id)
+                                    getNextMessage(msg.previous)
                                 } else
                                     res.render('messages/message', { list, msgs, receiver })
                             })
                             .catch(e => console.log(e))
                     } else {
                         msgs.unshift(msg)
-                        getNextMessage(msg._id)
+                        getNextMessage(msg.previous)
                     }
                 })
                 .catch(e => console.log(e));
@@ -99,9 +99,8 @@ async function user_message_get(req, res) {
 async function user_inbox_post(req, res) {
     let newMsg = new Message(req.body)
     newMsg.sender = req.user
-    newMsg.save()
     async function findLastMsg(req, res) {
-        const lastMsg = await Message.findOne({ sender: req.body.receiver, receiver: req.user._id, next: null }).sort({ createdAt: 1 }).limit(1)
+        const lastMsg = await Message.findOne({ sender: req.body.receiver, receiver: req.user._id, next: null })
         if (lastMsg === null) {
             const lastMsg = await Message.findOne({ receiver: req.body.receiver, sender: req.user._id, next: null })
             return lastMsg
