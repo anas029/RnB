@@ -48,22 +48,18 @@ async function user_message_get(req, res) {
         function retrieveMessages() {
             let count = 0;
             const getNextMessage = (id) => {
-                if (id == null) {
-                    res.render('messages/message', { list, msgs, receiver })
-                } else {
-                    Message.findById(id)
-                        .populate('sender')
-                        .populate('receiver')
-                        .then(msg => {
-                            if (msg !== null && count < LIMIT) {
-                                msgs.unshift(msg)
-                                count++
-                                getNextMessage(msg.previous);
-                            } else
-                                res.render('messages/message', { list, msgs, receiver })
-                        })
-                        .catch(e => console.log(e));
-                }
+                Message.findOne({ next: id })
+                    .populate('sender')
+                    .populate('receiver')
+                    .then(msg => {
+                        if (msg !== null && count < LIMIT) {
+                            msgs.unshift(msg)
+                            count++
+                            getNextMessage(msg._id);
+                        } else
+                            res.render('messages/message', { list, msgs, receiver })
+                    })
+                    .catch(e => console.log(e))
             }
 
             Message.findOne({ sender: req.query.id, receiver: req.user._id, next: null })
@@ -77,14 +73,14 @@ async function user_message_get(req, res) {
                             .then(msg => {
                                 if (msg !== null) {
                                     msgs.unshift(msg);
-                                    getNextMessage(msg.previous)
+                                    getNextMessage(msg._id)
                                 } else
                                     res.render('messages/message', { list, msgs, receiver })
                             })
                             .catch(e => console.log(e))
                     } else {
                         msgs.unshift(msg)
-                        getNextMessage(msg.previous)
+                        getNextMessage(msg._id)
                     }
                 })
                 .catch(e => console.log(e));
@@ -97,8 +93,6 @@ async function user_message_get(req, res) {
 
 //HTTP POST - my inbox
 async function user_inbox_post(req, res) {
-    let newMsg = new Message(req.body)
-    newMsg.sender = req.user
     async function findLastMsg(req, res) {
         const lastMsg = await Message.findOne({ sender: req.body.receiver, receiver: req.user._id, next: null })
         if (lastMsg === null) {
@@ -109,23 +103,19 @@ async function user_inbox_post(req, res) {
         }
     }
     const lastMsg = await findLastMsg(req, res)
-    if (lastMsg) {
-        newMsg.previous = lastMsg._id
-        newMsg.save()
-            .then(() => {
-                lastMsg.next = newMsg._id
-                lastMsg.save(() => {
-                    res.redirect(`/user/message?id=${req.body.receiver}`)
-                })
-            })
-    } else {
-        newMsg.previous = null
-        newMsg.save()
-            .then(msg => {
+    const newMsg = new Message(req.body)
+    newMsg.sender = req.user._id
+    newMsg.save()
+        .then(msg => {
+            if (lastMsg) {
+                lastMsg.next = msg._id
+                lastMsg.save()
+                    .then(res.redirect(`/user/message?id=${req.body.receiver}`))
+                    .catch(e => console.log(e));
+            } else
                 res.redirect(`/user/message?id=${req.body.receiver}`)
-            })
-    }
-
+        })
+        .catch(e => console.log(e));
 }
 
 module.exports = {
