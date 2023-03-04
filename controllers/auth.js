@@ -1,4 +1,3 @@
-const bcrypt = require('bcrypt');
 const User = require('../models/User')
 const passport = require('../lib/passportConfig')
 function auth_signup_get(req, res) {
