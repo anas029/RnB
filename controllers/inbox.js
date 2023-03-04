@@ -2,27 +2,26 @@ const Message = require('../models/Message')
 
 async function getContactList(req) {
     try {
-        let list = [];
-
+        let list = []
         const receivedMessages = await Message.find({ receiver: req.user._id, next: null })
             .populate('sender')
-            .populate('receiver');
+            .populate('receiver')
 
         if (receivedMessages.length > 0) {
-            list = list.concat(receivedMessages);
+            list = list.concat(receivedMessages)
         }
 
         const sentMessages = await Message.find({ sender: req.user._id, next: null })
             .populate('sender')
-            .populate('receiver');
+            .populate('receiver')
 
         if (sentMessages.length > 0) {
-            list = list.concat(sentMessages);
+            list = list.concat(sentMessages)
         }
-        return list;
+        return list
 
     } catch (e) {
-        console.log(e);
+        console.log(e)
     }
 }
 
@@ -95,21 +94,30 @@ async function user_message_get(req, res) {
 
     }
 }
+
 //HTTP POST - my inbox
-function user_inbox_post(req, res) {
+async function user_inbox_post(req, res) {
     let newMsg = new Message(req.body)
     newMsg.sender = req.user
-    if (req.body.previous) {
-        Message.findById(req.body.previous)
-            .then(oldMsg => {
-                newMsg.previous = oldMsg._id
-                newMsg.save()
-                    .then(msg => {
-                        newMsg = msg
-                    })
+    async function findLastMsg(req, res) {
+        const lastMsg = await Message.findOne({ sender: req.body.receiver, receiver: req.user._id, next: null })
+        if (lastMsg === null) {
+            const lastMsg = await Message.findOne({ receiver: req.body.receiver, sender: req.user._id, next: null })
+            return lastMsg
+        } else {
+            return lastMsg
+        }
+    }
+    const lastMsg = await findLastMsg(req, res)
+    if (lastMsg) {
+        newMsg.previous = lastMsg._id
+        newMsg.save()
+            .then(() => {
+                lastMsg.next = newMsg._id
+                lastMsg.save(() => {
+                    res.redirect(`/user/message?id=${req.body.receiver}`)
+                })
             })
-        Message.findByIdAndUpdate(req.body.previous, { $set: { next: newMsg._id } }, { new: true })
-            .then(res.redirect(`/user/message?id=${req.body.receiver}`))
     } else {
         newMsg.previous = null
         newMsg.save()
@@ -117,6 +125,7 @@ function user_inbox_post(req, res) {
                 res.redirect(`/user/message?id=${req.body.receiver}`)
             })
     }
+
 }
 
 module.exports = {

@@ -10,7 +10,6 @@
     return `${seconds} second${seconds !== 1 ? 's' : ''} ago`;
     }
     }
-    let lastMsg=null
     %>
     <section style="background-color: #eee;">
         <div class="container py-5">
@@ -61,8 +60,7 @@
 
                     <ul class="list-unstyled">
                         <% if (msgs.length!==0) { %>
-                            <% msgs.forEach(msg=> {
-                                lastMsg=msg %>
+                            <% msgs.forEach(msg=> { %>
                                 <% if (msg.sender._id.toString()===locals.user525._id.toString()) { %>
                                     <li class="d-flex justify-content-between mb-4">
                                         <div class="card w-100">
@@ -116,17 +114,9 @@
                                                                 <!-- <label class="form-label" for="textAreaExample2">Message</label> -->
                                                             </div>
                                                         </li>
-                                                        <% if (msgs.lenght) { %>
-                                                            <%= msgs.lenght %>
-                                                                <% } %>
-                                                                    <%if(lastMsg){%>
-                                                                        <input hidden name="previous"
-                                                                            value="<%= lastMsg._id %>" />
-                                                                        <%}%>
-                                                                            <input hidden name="receiver"
-                                                                                value="<%= receiver %>">
-                                                                            <button type="submit"
-                                                                                class="btn btn-info btn-rounded float-end">Send</button>
+                                                        <input hidden name="receiver" value="<%= receiver %>">
+                                                        <button type="submit"
+                                                            class="btn btn-info btn-rounded float-end">Send</button>
                                                     </form>
 
                     </ul>
