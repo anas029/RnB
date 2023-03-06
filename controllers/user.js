@@ -1,4 +1,5 @@
 const User = require('../models/User')
+const upload = require('../lib/upload')
 
 //HTTP GET - my profile :
 function user_myProfile_get(req, res, next) {
@@ -41,26 +42,31 @@ function user_edit_post(req, res) {
 }
 // HTTP POST - Update my profile Picture
 function user_editImg_post(req, res) {
-    User.findByIdAndUpdate(req.user._id, { profileImage: req.file.filename })
-        .then(() => {
-            res.redirect("/user/myProfile");
-        })
-        .catch((err) => {
-            console.log(err);
-            res.send("Please try again later!!!");
-        })
-
+    try {
+        User.findByIdAndUpdate(req.user._id, { profileImage: req.file.filename })
+            .then(res.redirect("/user/myProfile"))
+            .catch((e) => {
+                req.session.flashMessage = 'Something went wrong.'
+                console.log(e.message)
+                res.redirect("/user/edit/")
+            })
+    } catch (e) {
+        req.session.flashMessage = 'Something went wrong.'
+        console.log(e.message)
+        res.redirect("/user/edit/")
+    }
 }
 
 //HTTP GET - All profile:
 function user_updatePassword_post(req, res) {
     const data = req.body
     data.id = req.user.id
-    console.log(data)
+    // console.log(data)
     User.changePassword(data)
-        .then(res.redirect('/auth/signout'))
-        .catch(err => {
-            console.log(err.message);
+        .then((r) => res.redirect('/auth/signout'))
+        .catch(e => {
+            req.session.flashMessage = e.message
+            res.redirect('/user/edit')
         })
 }
 
