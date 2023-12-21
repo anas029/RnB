@@ -25,7 +25,10 @@ app.use(session({
 }))
 app.use(passport.initialize())
 app.use(passport.session())
+
+// locals
 app.use((req, res, next) => {
+    res.locals.user = req.user
     res.locals = { user525: req.user }
     next()
 })
@@ -53,22 +56,22 @@ app.use(express.urlencoded({ extended: true }))
 
 
 // import routes
-const indexRouter = require('./routers/index')
-const authRouter = require('./routers/auth')
-const reviewRouter = require('./routers/review')
-const userRouter = require('./routers/user')
-const inboxRouter = require('./routers/inbox')
-const itemRouter = require('./routers/item')
-const paymentRouter = require('./routers/payment')
+// const indexRouter = require('./routers/index')
+// const authRouter = require('./routers/auth')
+// const reviewRouter = require('./routers/review')
+// const userRouter = require('./routers/user')
+// const inboxRouter = require('./routers/inbox')
+// const itemRouter = require('./routers/item')
+// const paymentRouter = require('./routers/payment')
 
 //Mount Routes
-app.use('/', indexRouter)
-app.use('/auth', authRouter)
-app.use('/review', reviewRouter)
-app.use('/user', userRouter)
-app.use('/user', inboxRouter)
-app.use('/item/', itemRouter)
-app.use('/payment', paymentRouter)
+app.use('/', require('./routers/index'))
+app.use('/auth', require('./routers/auth'))
+app.use('/review', require('./routers/review'))
+app.use('/user', require('./routers/user'))
+app.use('/user', require('./routers/inbox'))
+app.use('/item/', require('./routers/item'))
+app.use('/payment', require('./routers/payment'))
 
 
-app.listen(PORT, () => console.log('server [RnB] is on', PORT))
+app.listen(PORT, () => console.log(`server [RnB] is running on http://localhost:${PORT}`))
