@@ -5,16 +5,17 @@ const dotenv = require('dotenv').config({ path: '.env.local' });
 if (dotenv.error) {
     throw dotenv.error;
 }
+// connect to Mongodb database
+require('./config/db')
 
 const express = require('express')
+const passport = require('./lib/passportConfig')
 const app = express()
-require('./config/db')
 
 // Port 3000
 const PORT = process.env.PORT || 3000
 
 const session = require('express-session')
-const passport = require('./lib/passportConfig')
 const flash = require('express-flash')
 
 
@@ -35,51 +36,27 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 // locals
-app.use((req, res, next) => {
-    res.locals.user = req.user
-    res.locals = { user525: req.user }
-    next()
-})
+app.use(require('./lib/locals'))
+
+// auth middleware
+app.use((req, res) => console.log(req.url))
+// app.use(require('./lib/locals'))
 
 
-// Set up flash messages middleware
-app.use((req, res, next) => {
-    if (req.session.flashMessage) {
-        res.locals.flashMessage = req.session.flashMessage;
-        delete req.session.flashMessage;
-    }
-    next();
-});
-
-
+// Templates
 //static folder
 app.use(express.static('public'))
-//node.js to look in a folder 
+//set template engin: ejs
 app.set('view engine', 'ejs')
-// initialisation Express layouts
-const expressLayouts = require('express-ejs-layouts')
 // look into views folder for a file with name layout.ejs
-app.use(expressLayouts)
+app.set('layout', 'layout/main')
+// initialisation Express layouts
+app.use(require('express-ejs-layouts'))
+
+// read data from request.body 
 app.use(express.urlencoded({ extended: true }))
 
-
-// import routes
-// const indexRouter = require('./routers/index')
-// const authRouter = require('./routers/auth')
-// const reviewRouter = require('./routers/review')
-// const userRouter = require('./routers/user')
-// const inboxRouter = require('./routers/inbox')
-// const itemRouter = require('./routers/item')
-// const paymentRouter = require('./routers/payment')
-
-//Mount Routes
-app.use('/', require('./routers/index'))
-app.use('/auth', require('./routers/auth'))
-app.use('/review', require('./routers/review'))
-app.use('/user', require('./routers/user'))
-app.use('/user', require('./routers/inbox'))
-app.use('/item/', require('./routers/item'))
-app.use('/payment', require('./routers/payment'))
+app.use(require('./routers/router'))
 
 
 app.listen(PORT, () => console.log(`server [RnB] is running on http://localhost:${PORT}`))
