@@ -1,3 +1,11 @@
+// Import the dotenv library and configure it with the path to your local file
+const dotenv = require('dotenv').config({ path: '.env.local' });
+
+// Check if there was an error loading the environment variables
+if (dotenv.error) {
+    throw dotenv.error;
+}
+
 const express = require('express')
 const app = express()
 require('./config/db')
@@ -15,7 +23,7 @@ app.use(flash())
 
 // session
 app.use(session({
-    secret: process.env.KEY,
+    secret: process.env.SECRET_KEY,
     saveUninitialized: false,
     resave: false,
     cookie: {
