@@ -2,6 +2,7 @@ const passport = require('passport')
 const User = require('../models/User')
 
 const LocalStrategy = require('passport-local').Strategy
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 // This saves the ID in the session
 passport.serializeUser(function (user, done) {
@@ -28,5 +29,35 @@ passport.use(new LocalStrategy({
             })
     }
 ))
+passport.use(new GoogleStrategy(
+    // Configuration object
+    {
+        clientID: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_SECRET,
+        callbackURL: process.env.GOOGLE_CALLBACK
+    },
+    // The verify callback function
+    async function (accessToken, refreshToken, profile, done) {
+        // A user has logged in with OAuth...
+        try {
+            // Check if the user is already in your database based on profile.id or any other identifier
+            let user = await User.findOne({ googleId: profile.id });
+
+            if (!user) {
+                // Create a new user in your database if not found
+                user = await User.create({
+                    googleId: profile.id,
+                    name: profile.displayName,
+                    emailAddress: profile.emails[0].value,
+                    profileImage: profile.photos[0].value
+                });
+            }
+
+            return done(null, user);
+        } catch (err) {
+            return done(err);
+        }
+    }
+));
 
 module.exports = passport
