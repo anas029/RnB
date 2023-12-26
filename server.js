@@ -9,7 +9,7 @@ if (dotenv.error) {
 require('./config/db')
 
 const express = require('express')
-const passport = require('./lib/passportConfig')
+const passport = require('./config/passportConfig')
 const app = express()
 
 // Port 3000
@@ -56,6 +56,7 @@ app.use(require('express-ejs-layouts'))
 // read data from request.body 
 app.use(express.urlencoded({ extended: true }))
 
+// Router middleware
 app.use(require('./routers/router'))
 
 

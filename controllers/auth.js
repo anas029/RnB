@@ -1,5 +1,5 @@
 const User = require('../models/User')
-const passport = require('../lib/passportConfig')
+const passport = require('../config/passportConfig')
 function auth_signup_get(req, res) {
     res.render('auth/signup')
 }
