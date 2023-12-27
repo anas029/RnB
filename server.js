@@ -10,6 +10,7 @@ require('./config/db')
 
 const express = require('express')
 const passport = require('./config/passportConfig')
+const logger = require('./lib/logger')
 const app = express()
 
 // Port 3000
@@ -39,7 +40,7 @@ app.use(passport.session())
 app.use(require('./lib/locals'))
 
 // auth middleware
-app.use((req, res) => console.log(req.url))
+app.use(logger.reqLog)
 // app.use(require('./lib/locals'))
 
 
@@ -60,4 +61,4 @@ app.use(express.urlencoded({ extended: true }))
 app.use(require('./routers/router'))
 
 
-app.listen(PORT, () => console.log(`server [RnB] is running on http://localhost:${PORT}`))
+app.listen(PORT, () => logger.info(`server [RnB] is running on http://localhost:${PORT}`))
