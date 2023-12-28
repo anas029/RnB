@@ -60,5 +60,5 @@ app.use(express.urlencoded({ extended: true }))
 // Router middleware
 app.use(require('./routers/router'))
 
-
 app.listen(PORT, () => logger.info(`server [RnB] is running on http://localhost:${PORT}`))
+logger.debug('line one', { message: false })
