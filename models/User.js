@@ -4,12 +4,15 @@ const mongoose = require('mongoose')
 const userSchema = mongoose.Schema({
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
-    username: { type: String, required: true, unique: true, lowercase: true },
+    username: { type: String, required: false, unique: true, lowercase: true },
     profileImage: { type: String, default: "default.jpg" },
-    emailAddress: { type: String, required: true, unique: true, lowercase: true },
-    telNumber: { type: String, required: true },
-    password: { type: String, required: true },
+    emailAddress: { type: String, required: false, unique: true, lowercase: true },
+    googleId: { type: String, required: false, unique: true },
+    googleEmailAddress: { type: String, required: false, unique: true, lowercase: true },
+    telNumber: { type: String, required: false },
+    password: { type: String, required: false },
     credit: { type: Number, default: 0 },
+    isActive: { type: Boolean, default: false }
 
 }, { timestamps: true })
 
