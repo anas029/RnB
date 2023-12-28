@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const logger = require('../lib/logger')
+const { logger } = require('../lib/logger')
 const db = process.env.DB_URI
 mongoose.set('strictQuery', true)
 mongoose.connect(db)
