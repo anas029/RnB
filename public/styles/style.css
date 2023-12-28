@@ -161,3 +161,7 @@ form.addItem>label {
     right: -42%;
     /* top: -40%; */
 }
+
+section {
+    padding: 60px 0;
+}
