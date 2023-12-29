@@ -1,3 +1,8 @@
+<style>
+    ul.dropdown-menu a.dropdown-item {
+        background-color: transparent !important;
+    }
+</style>
 <nav class="py-2 bg-body-tertiary border-bottom">
     <div class="container d-flex flex-wrap">
         <ul class="nav me-auto">
@@ -38,12 +43,12 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="#">Sign out</a></li>
+                            <li><a class="dropdown-item" href="/auth/signout">Sign out</a></li>
                             <%}else{%>
-                                <li><a class="dropdown-item text-center p-2 fs-5 text-primary" href="#">Sign
+                                <li><a class="dropdown-item text-center p-2 fs-5 text-primary" href="/auth/signin">Sign
                                         in</a></li>
                                 <li class="dropdown-item fs-6 fw-light" style="user-select: none;">
-                                    New Customer?<br /><a href="#">Start
+                                    New Customer?<br /><a href="/auth/signup">Start
                                         here</a>
                                 </li>
                                 <%}%>
