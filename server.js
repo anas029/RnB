@@ -39,7 +39,7 @@ app.use(passport.session())
 app.use(require('./lib/locals'))
 
 // auth middleware
-app.use((req, res) => console.log(req.url))
+// app.use((req, res) => console.log(req.url))
 // app.use(require('./lib/locals'))
 
 
