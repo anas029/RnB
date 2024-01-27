@@ -17,7 +17,8 @@ const app = express()
 const PORT = process.env.PORT || 3000
 
 const session = require('express-session')
-const flash = require('express-flash')
+const flash = require('express-flash');
+const authMiddleware = require('./helper/authMiddleware');
 
 
 //middleware
@@ -27,7 +28,7 @@ app.use(flash())
 app.use(session({
     secret: process.env.SECRET_KEY,
     saveUninitialized: false,
-    resave: false,
+    resave: true,
     cookie: {
         httpOnly: true,
         maxAge: 259200
@@ -40,8 +41,10 @@ app.use(passport.session())
 app.use(require('./lib/locals'))
 
 // auth middleware
+app.use(authMiddleware)
+// request logger
 app.use(logger.reqLog)
-// app.use(require('./lib/locals'))
+
 
 
 // Templates

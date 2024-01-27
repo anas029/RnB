@@ -39,45 +39,7 @@ passport.use(new GoogleStrategy(
     },
     // The verify callback function
     async function (accessToken, refreshToken, profile, done) {
-        // A user has logged in with OAuth...
-        // logger.debug({
-        //     googleId: profile.id,
-        //     firstName: profile.name.givenName,
-        //     lastName: profile.name.familyName,
-        //     profileImage: profile.photos[0].value,
-        //     emailAddress: profile.emails[0].value,
-        // })
-        /*  id: '101048612745494424497',
-  displayName: 'Ali Naser',
-  name: { familyName: 'Naser', givenName: 'Ali' },
-  emails: [ { value: 'ali.yaqoob@gmail.com', verified: true } ],
-  photos: [
-    {
-      value: 'https://lh3.googleusercontent.com/a/ACg8ocK5ALF73wu7cmisTjeRzq84K5BG28VUHlLQqzZQZoGCtgY=s96-c'
-    }
-  ],
-  provider: 'google',
-  _raw: '{\n' +
-    '  "sub": "101048612745494424497",\n' +
-    '  "name": "Ali Naser",\n' +
-    '  "given_name": "Ali",\n' +
-    '  "family_name": "Naser",\n' +
-    '  "picture": "https://lh3.googleusercontent.com/a/ACg8ocK5ALF73wu7cmisTjeRzq84K5BG28VUHlLQqzZQZoGCtgY\\u003ds96-c",\n' +
-    '  "email": "ali.yaqoob@gmail.com",\n' +
-    '  "email_verified": true,\n' +
-    '  "locale": "en"\n' +
-    '}',
-  _json: {
-    sub: '101048612745494424497',
-    name: 'Ali Naser',
-    given_name: 'Ali',
-    family_name: 'Naser',
-    picture: 'https://lh3.googleusercontent.com/a/ACg8ocK5ALF73wu7cmisTjeRzq84K5BG28VUHlLQqzZQZoGCtgY=s96-c',
-    email: 'ali.yaqoob@gmail.com',
-    email_verified: true,
-    locale: 'en'
-  }
-}*/
+
         try {
             // Check if the user is already in your database based on profile.id or any other identifier
             let user = await User.findOne({ googleId: profile.id });

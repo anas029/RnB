@@ -57,9 +57,11 @@ function item_create_get(req, res) {
 }
 // HTTP POST - ADD
 function item_create_post(req, res) {
+    if (req.files) {
+        req.body.itemImage = req.files.map(file => file.path)
+    }
     const item = new Item(req.body);
     item.owner = req.user._id
-    item.itemImage = req.file.filename
     item.save()
         .then(() => {
             res.redirect("/user/myprofile")
@@ -79,7 +81,7 @@ function item_addImg_post(req, res) {
     Item.findById(req.query.id).populate('owner')
         .then(item => {
             if (item.owner.id == req.user._id) {
-                item.itemImage = req.file.filename
+                item.itemImage = [...item.itemImage, ...req.files.map(file => file.path)]
                 item.save()
                     .then(res.redirect('/user/myProfile'))
                     .catch(e => {
@@ -214,6 +216,18 @@ function item_edit_post(req, res) {
             res.redirect('/item/index')
         })
 }
+// Remove Image
+function item_image_edit_post(req, res) {
+    Item.findByIdAndUpdate(req.body.id, { $pull: { itemImage: req.body.itemImage } }, { new: true })
+        .then((b) => {
+            res.redirect(`/item/edit?id=${req.body.id}`);
+        })
+        .catch((err) => {
+            req.session.flashMessage = 'Something went wrong'
+            console.log(err);
+            res.redirect('/user/myProfile')
+        })
+}
 ///-
 function item_edit2_get(req, res) {
     // Item.findOneAndUpdate(filter, update, { new: true })
@@ -257,6 +271,7 @@ module.exports = {
     item_return_post,
     item_edit_get,
     item_edit_post,
+    item_image_edit_post,
     item_delete_get,
     item_edit2_get
 }

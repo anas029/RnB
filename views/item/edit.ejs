@@ -1,76 +1,87 @@
 <!-- add item pix layout -->
 <section class="vh-100">
-  <div class="container py-5">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-
-    </div>
-    <h2 class="edit">Edit Item</h2>
-    <form action="/item/addimg?id=<%= item._id %>" class="my-4" method="post" enctype="multipart/form-data">
-
-      <img src="/images/items/<%= item.itemImage %>" alt="profile picture" width="200" height="200" class="pic">
-
-      <div class="row align-items-center justify-content-around row g-3">
-
-        <div class="col-9">
-
-          <input class="form-control" type="file" name="itemImage" required>
+    <div class="container py-5">
+        <div class="row d-flex justify-content-center align-items-center h-100">
 
         </div>
-        <div class="col-3">
-
-          <input type="submit" class="btn btn-outline-primary ms-1" value="Update Image">
+        <h2 class="edit">Edit Item</h2>
+        <div class="row column-gap-3">
+            <% for( let index=0; index < item.itemImage.length; index++ ) { %>
+                <form action="/item/edit/image/remove" method="post" class="col-2">
+                    <img src="<%= item.itemImage[index] %>" alt="<%= item.itemName %>" width="200" height="200">
+                    <input type="text" name="itemImage" hidden value="<%= item.itemImage[index] %>">
+                    <input type="text" name="id" hidden value="<%= item._id %>">
+                    <input type="submit" value="X" class="btn btn-danger rounded-circle">
+                </form>
+                <% } %>
         </div>
+        <form action="/item/addimg?id=<%= item._id %>" class="my-4" method="post" enctype="multipart/form-data">
 
-      </div>
 
-    </form>
-    <!-- edit form layout -->
+            <div class="row align-items-center justify-content-around row g-3">
 
-    <div class="row g-3">
+                <div class="col-9">
 
-      <form class="row g-3 justify-content-around border p-2" method="POST" action="/user/edit">
-        <div class="col-md-6">
-          <label>Item Name</label>
-          <input name="itemName" type="text" class="form-control" value="<%= item.itemName %>" required>
+                    <input class="form-control" type="file" name="itemImage" required multiple
+                        accept=".png, .jpg, .jpeg">
+
+                </div>
+                <div class="col-3">
+
+                    <input type="submit" class="btn btn-outline-primary ms-1" value="Update Image">
+                </div>
+
+            </div>
+
+        </form>
+        <!-- edit form layout -->
+
+        <div class="row g-3">
+
+            <form class="row g-3 justify-content-around border p-2" method="POST" action="/user/edit">
+                <div class="col-md-6">
+                    <label>Item Name</label>
+                    <input name="itemName" type="text" class="form-control" value="<%= item.itemName %>" required>
+                </div>
+                <div class="col-md-6">
+                    <label>Item description</label>
+                    <textarea name="lastName" type="text" class="form-control"
+                        required><%= item.description %></textarea>
+                </div>
+                <div class="col-md-6">
+                    <label>Price pre day</label>
+                    <input name="priceRate" type="number" class="form-control" value="<%= item.priceRate %>" min="0"
+                        required>
+                </div>
+                <div class="col-md-6">
+                    <label>Dopsite amount</label>
+                    <input name="deposit" type="number" class="form-control" value="<%= item.deposit %>" min="0"
+                        required>
+                </div>
+                <div class="col-md-6 dropdown-center">
+                    <label>Item condition</label>
+                    <select name="condition" id="condition" class="addItem" required>
+                        <option value="new">new</option>
+                        <option value="good">good</option>
+                        <option value="old">old</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label>Item Type</label>
+                    <select name="type" id="type" class="addItem" required>
+                        <option value="home appliances">home appliances</option>
+                        <option value="electronics">electronics</option>
+                        <option value="other">other</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6 d-flex align-items-end">
+
+                    <input type="submit" class="btn btn-outline-primary ms-1" value="Update info">
+                </div>
+
+            </form>
+
         </div>
-        <div class="col-md-6">
-          <label>Item description</label>
-          <textarea name="lastName" type="text" class="form-control" required>
-                <%= item.description %>
-                </textarea>
-        </div>
-        <div class="col-md-6">
-          <label>Price pre day</label>
-          <input name="priceRate" type="text" class="form-control" value="<%= item.priceRate %>" min="0" required>
-        </div>
-        <div class="col-md-6">
-          <label>Dopsite amount</label>
-          <input name="deposit" type="text" class="form-control" value="<%= item.deposit %>" min="0" required>
-        </div>
-        <div class="col-md-6 dropdown-center">
-          <label>Item condition</label>
-          <select name="condition" id="condition" class="addItem" required>
-            <option value="new">new</option>
-            <option value="good">good</option>
-            <option value="old">old</option>
-          </select>
-        </div>
-        <div class="col-md-6">
-          <label>Item Type</label>
-          <select name="type" id="type" class="addItem" required>
-            <option value="home appliances">home appliances</option>
-            <option value="electronics">electronics</option>
-            <option value="other">other</option>
-          </select>
-        </div>
-
-        <div class="col-md-6 d-flex align-items-end">
-
-          <input type="submit" class="btn btn-outline-primary ms-1" value="Update info">
-        </div>
-
-      </form>
-
-    </div>
 
 </section>

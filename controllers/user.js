@@ -2,7 +2,7 @@ const User = require('../models/User')
 const upload = require('../lib/upload')
 
 //HTTP GET - my profile :
-function user_myProfile_get(req, res, next) {
+function user_myProfile_get(req, res) {
     User.findById(req.user._id).populate({ path: 'item', populate: { path: 'review' } }).populate('borrowedItem')
         .then(user => {
             res.render("user/myProfile", { user });
@@ -17,7 +17,6 @@ function user_myProfile_get(req, res, next) {
 
 //HTTP GET - load edit form :
 function user_edit_get(req, res) {
-
     User.findByIdAndUpdate(req.user._id)
         .then(user => {
             res.render("user/edit", { user });
@@ -43,7 +42,7 @@ function user_edit_post(req, res) {
 // HTTP POST - Update my profile Picture
 function user_editImg_post(req, res) {
     try {
-        User.findByIdAndUpdate(req.user._id, { profileImage: req.file.filename })
+        User.findByIdAndUpdate(req.user._id, { profileImage: req.file?.path })
             .then(res.redirect("/user/myProfile"))
             .catch((e) => {
                 req.session.flashMessage = 'Something went wrong.'
