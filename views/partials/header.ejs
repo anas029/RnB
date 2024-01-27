@@ -47,7 +47,7 @@
                             <%}else{%>
                                 <li><a class="dropdown-item text-center p-2 fs-5 text-primary" href="/auth/signin">Sign
                                         in</a></li>
-                                <li class="dropdown-item fs-6 fw-light" style="user-select: none;">
+                                <li class="dropdown-item fs-6 fw-light" id="signup_li" style="user-select: none;">
                                     New Customer?<br /><a href="/auth/signup">Start
                                         here</a>
                                 </li>
@@ -59,7 +59,7 @@
 <header class="py-3 mb-4 border-bottom">
     <div class="container d-flex flex-wrap justify-content-center">
         <a href="/" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto link-body-emphasis text-decoration-none">
-            <img src="/images/logo.png" class="float-left" width="30" alt="logo">
+            <img src="/static/images/logo.png" class="float-left" width="30" alt="logo">
 
             <span class="fs-4"> &nbsp; &nbsp;&nbsp; The Power of Sharing</span>
         </a>
@@ -68,3 +68,8 @@
         </form>
     </div>
 </header>
+<style>
+    #signup_li:active a {
+        color: white;
+    }
+</style>

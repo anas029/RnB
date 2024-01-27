@@ -1,5 +1,4 @@
-const express = require('express')
-const router = express()
+const router = require('express').Router()
 const isLoggedIn = require('../lib/isLoggedIn');
 const paymentCntrl = require('../controllers/payment')
 

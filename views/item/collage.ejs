@@ -1,0 +1,40 @@
+<!-- <div class="col-lg-5">
+    <div class="card mb-5">
+        <div class="card shadow-sm">
+            <img src="/static/images/items/<%= item.itemImage %>" alt="item picture" class="img-fluid" width="100%"
+                height="600" role="img" aria-label="<%= item.itemName %>" preserveAspectRatio="xMidYMid slice"
+                focusable="false">
+        </div>
+
+    </div>
+</div> -->
+
+<div class="col-lg-5">
+
+    <div id="carouselExampleIndicators" class="carousel slide">
+        <div class="carousel-indicators">
+            <% for( let index=0; index < item.itemImage.length; index++ ) { %>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="<%= index %>"
+                    class="<%= index === 0 && " active" %>" aria-current="<%= index===0 && "true" %>"
+                        aria-label="Slide <%= index + 1 %>"></button>
+                <% } %>
+        </div>
+        <div class="carousel-inner">
+            <% for( let index=0; index < item.itemImage.length; index++ ) { %>
+                <div class="carousel-item <%= index === 0 && " active" %>">
+                    <img src="<%= item.itemImage[index] %>" class="d-block w-100" alt="<%= item.itemName %>">
+                </div>
+                <% } %>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
